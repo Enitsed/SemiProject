@@ -4,12 +4,23 @@
     "guess-types": {
       
     },
+    "es_modules": {
+      
+    },
     "ckeditor4.4.x": {
+      
+    },
+    "browser-extension": {
+      
+    },
+    "bootstrap": {
+      
+    },
+    "jquery-extension": {
       
     }
   },
   "libs": [
-    "ecma5",
     "browser",
     "jquery"
   ]

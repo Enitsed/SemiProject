@@ -8,15 +8,11 @@
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- Latest compiled and minified JavaScript -->
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -38,6 +34,13 @@
 	width: 200px;
 }
 </style>
+<script type="text/javascript">
+    $(document).ready(function() {
+	$('#signUp').on('click', function() {
+	    location.href = 'join.jsp';
+	});
+    });
+</script>
 </head>
 <body>
 	<form class="form-horizontal">
@@ -56,14 +59,15 @@
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<div class="checkbox">
-					<label> <input type="checkbox"> Remember me
+					<label> <input type="checkbox"> 아이디 저장
 					</label>
 				</div>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">Sign in</button>
+				<button type="submit" class="btn btn-default">로그인</button>
+				<button type="button" class="btn btn-success" id="signUp">회원가입</button>
 			</div>
 		</div>
 	</form>
