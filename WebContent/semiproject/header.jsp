@@ -20,9 +20,64 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<style type="text/css">
+.header {
+	width: 1000px;
+	height: 300px;
+}
+
+.body {
+	width: 1000px;
+	height: fit-content;
+	margin: auto;
+}
+</style>
+
 </head>
 <body>
+	<div class="header">헤더</div>
+	<div class="body">
+		<table class="table table-bordered">
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>test</td>
+					<td>ㅇㅇ</td>
+					<td>12-04</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>test</td>
+					<td>ㅇㅇ</td>
+					<td>12-04</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>test</td>
+					<td>ㅇㅇ</td>
+					<td>12-04</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>test</td>
+					<td>ㅇㅇ</td>
+					<td>12-04</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>test</td>
+					<td>ㅇㅇ</td>
+					<td>12-04</td>
+				</tr>
 
+			</tbody>
+
+		</table>
+	</div>
 
 </body>
 </html>

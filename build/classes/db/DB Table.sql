@@ -47,10 +47,10 @@ create table reply(
 );
 
 
+insert into users
+ values(user_seq.nextval,'홍길동','홍길동','홍길동','남','g@g.com','서울', 01089580333, 0123);
 
 
-insert into board 
-
-values(board_seq.nextval, '홍길동','young@aaaa.com','제목1',sysdate,0,board_seq.nextval,
-0,0,'내용 테스트.......','127.0.0.1','sample.txt');
+insert into board
+ values('홍길동', board_seq.nextval,'제목4',sysdate,0,'sample.txt','내용 테스트.......',01);
 

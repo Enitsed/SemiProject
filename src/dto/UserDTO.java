@@ -1,4 +1,4 @@
-package semiproject.dto;
+package dto;
 
 public class UserDTO {
 	private int user_num; // 회원번호

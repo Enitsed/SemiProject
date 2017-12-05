@@ -1,4 +1,4 @@
-package semiproject.dto;
+package dto;
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ public class BoardDTO {
 	private int board_loc_code; // 지역코드
 
 	public BoardDTO() {
-		
+
 	}
 
 	public String getUser_id() {
