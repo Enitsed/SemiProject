@@ -165,4 +165,28 @@ public class BoardDAO {
 		}
 	} // end writeMethod()
 
+	public String fileMethod(int num) {
+		String filename = null;
+		try {
+			conn = init();
+			String sql = "select board_upload from board where board_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				filename = rs.getString("board_upload");
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				exit();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return filename;
+	} // end fileMethod()
+
 } // end class

@@ -36,9 +36,10 @@
 							<c:param name="num" value="${dto.board_num}" />
 						</c:url>
 						<a href="${link}"> <img
-							src="../semiproject/images/himalayan.jpg" class="img-rounded" />
-							<span>[ ${dto.board_category}] ${dto.board_subject }</span> <span
-							class="badge">${dto.board_readcount }</span> ${dto.board_date }
+							src="../semiproject/upload/${dto.board_upload }"
+							class="img-rounded" /> <span>[ ${dto.board_category}]
+								${dto.board_subject }</span> <span class="badge">${dto.board_readcount }</span>
+							${dto.board_date }
 						</a>
 					</article>
 				</c:forEach>

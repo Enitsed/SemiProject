@@ -28,6 +28,10 @@
 						+ '</option>');
 			    });
 			});
+
+		$('#write').on('click', function() {
+		    $('form').submit();
+		})
 	    });
 </script>
 </head>
@@ -40,7 +44,7 @@
 		<div id="templatemo_main">
 			<div class="container">
 				<form name="frm" action="/semiproject/main/write" method="post"
-					encType="multiplart/form-data">
+					encType="multipart/form-data">
 					<table class="table table-bordered">
 						<caption>글쓰기</caption>
 						<tbody>
@@ -86,10 +90,9 @@
 							</tr>
 
 							<tr>
-								<td colspan="2"><input type="submit"
-									class="btn btn-default" value="등록" /> <input type="button"
-									class="btn btn-default" value="목록"
-									onclick="javascript:location.href='board'" /> <input
+								<td colspan="2"><input type="button"
+									class="btn btn-default" value="등록" id="write" /> <input
+									type="button" class="btn btn-default" value="목록" /> <input
 									type="reset" class="btn btn-default" value="reset" /></td>
 							</tr>
 						</tbody>

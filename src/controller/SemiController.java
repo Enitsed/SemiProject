@@ -59,6 +59,10 @@ public class SemiController extends HttpServlet {
 			req.setAttribute("command", command);
 			boardAction.execute(req, resp);
 			path = "/semiproject/view.jsp";
+		} else if (action.equals("/download")) {
+			command = "download";
+			req.setAttribute("command", command);
+			boardAction.execute(req, resp);
 		}
 
 		//////////////////////////////////////////////////
