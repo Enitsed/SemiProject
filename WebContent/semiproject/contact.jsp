@@ -46,6 +46,7 @@
 			</div>
 		</div>
 		<!-- END of templatemo_main -->
+		<div class="clear"></div>
 	</div>
 	<!-- END of templatemo_wrapper -->
 	<jsp:include page="../semiproject/footer.jsp" />
