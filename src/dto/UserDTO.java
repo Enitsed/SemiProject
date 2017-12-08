@@ -1,5 +1,7 @@
 package dto;
 
+import java.util.Date;
+
 public class UserDTO {
 	private int user_num; // 회원번호
 	private String user_name; // 회원이름
@@ -8,8 +10,9 @@ public class UserDTO {
 	private String user_gender; // 회원성별
 	private String user_email; // 회원이메일
 	private String user_address; // 회원주소
-	private int user_contact; // 회원연락처
-	private int user_birthday; // 회원생년월일
+	private String user_contact; // 회원연락처
+	private String user_birthday; // 회원생년월일
+	private Date user_join_date; // 회원가입일자
 
 	public UserDTO() {
 	}
@@ -70,20 +73,28 @@ public class UserDTO {
 		this.user_address = user_address;
 	}
 
-	public int getUser_contact() {
+	public String getUser_contact() {
 		return user_contact;
 	}
 
-	public void setUser_contact(int user_contact) {
+	public void setUser_contact(String user_contact) {
 		this.user_contact = user_contact;
 	}
 
-	public int getUser_birthday() {
+	public String getUser_birthday() {
 		return user_birthday;
 	}
 
-	public void setUser_birthday(int user_birthday) {
+	public void setUser_birthday(String user_birthday) {
 		this.user_birthday = user_birthday;
+	}
+
+	public Date getUser_join_date() {
+		return user_join_date;
+	}
+
+	public void setUser_join_date(Date user_join_date) {
+		this.user_join_date = user_join_date;
 	}
 
 }// end class

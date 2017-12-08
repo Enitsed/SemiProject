@@ -1,0 +1,85 @@
+/* 게시판 글 목록 */
+.article {
+	padding: 30px;
+}
+
+article {
+	width: 195px;
+	height: 200px;
+	margin: 10px;
+	margin-bottom: 5px;
+	padding: 5px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	float: left;
+}
+
+article img {
+	width: 100%;
+	max-width: 400px;
+	vertical-align: middle;
+	margin: 5px;
+}
+
+article a p {
+	padding-left: 5px;
+}
+
+.clear {
+	margin: 0px;
+	clear: both;
+}
+
+/* 게시판 폼 */
+.form-group {
+	width: 550px;
+	margin: auto;
+	padding: 10px;
+}
+
+.form-control {
+	width: 200px;
+	display: inline;
+}
+
+/* 글쓰기버튼 */
+.write {
+	float: right;
+}
+
+/* 페이지네이션 */
+nav {
+	width: 250px;
+	height: 50px;
+	padding: 5px;
+	margin: auto;
+}
+
+.form-group {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+.form-group>* {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+/* 카테고리 리스트 */
+.navbar {
+	width: 20%;
+	height: 100%;
+	height: -moz-available;
+	/* WebKit-based browsers will ignore this. */
+	height: -webkit-fill-available;
+	/* Mozilla-based browsers will ignore this. */
+	float: left;
+}
+
+/* 카테고리 리스트 배지*/
+.label-default {
+	background-color: orange;
+}

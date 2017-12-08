@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -14,8 +16,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style type="text/css">
 .form-horizontal {
 	margin: 5px auto;
@@ -37,23 +37,24 @@
 <script type="text/javascript">
     $(document).ready(function() {
 	$('#signUp').on('click', function() {
-	    location.href = 'join.jsp';
+	    location.href = '/semiproject/board/join';
 	});
     });
 </script>
 </head>
 <body>
-	<form class="form-horizontal">
+	<form class="form-horizontal" action="/semiproject/main/login_check"
+		method="post">
 		<div class="form-group">
 			<div class="col-sm-10">
-				<input type="email" class="form-control" id="inputEmail3"
-					placeholder="Email">
+				<input type="text" class="form-control" id="id" name="id"
+					placeholder="ID">
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-10">
-				<input type="password" class="form-control" id="inputPassword3"
-					placeholder="Password">
+				<input type="password" class="form-control" id="password"
+					name="password" placeholder="Password">
 			</div>
 		</div>
 		<div class="form-group">

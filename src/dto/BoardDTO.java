@@ -11,6 +11,8 @@ public class BoardDTO {
 	private String board_upload; // 첨부파일
 	private String board_content; // 내용
 	private int board_loc_code; // 지역코드
+	private int board_loc_city_code; // 도시코드
+	private String board_category; // 게시판카테고리
 
 	public BoardDTO() {
 
@@ -78,6 +80,22 @@ public class BoardDTO {
 
 	public void setBoard_loc_code(int board_loc_code) {
 		this.board_loc_code = board_loc_code;
+	}
+
+	public int getBoard_loc_city_code() {
+		return board_loc_city_code;
+	}
+
+	public void setBoard_loc_city_code(int board_loc_city_code) {
+		this.board_loc_city_code = board_loc_city_code;
+	}
+
+	public String getBoard_category() {
+		return board_category;
+	}
+
+	public void setBoard_category(String board_category) {
+		this.board_category = board_category;
 	}
 
 }// end class
