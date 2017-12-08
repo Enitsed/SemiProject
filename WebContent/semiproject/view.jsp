@@ -22,36 +22,26 @@
 	    });
 	</script>
 		<!--상세보기폼 -->
-		<table align="center">
+		<table align="center" height="400">
 			<tr>
 				<td>
-					<table width="100%" cellpadding="0" cellspacing="0" border="0">
-						<tr
-							style="background: url('img/table_mid.gif') repeat-x; text-align: center;">
-							<td width="5"><img src="img/table_left.gif" width="5"
-								height="30" /></td>
-							<td>내 용</td>
-							<td width="5"><img src="img/table_right.gif" width="5"
-								height="30" /></td>
-						</tr>
-					</table>
-
-					<table width="413">
+					<table width="400">
 						<tr>
 							<!--글번호-->
 							<td width="0">&nbsp;</td>
-							<td align="center" width="76">글번호</td>
-							<td width="319">${dto.board_num}</td>
+							<td align="center" width="76">글번호:</td>
+							<td width="0">${dto.board_num}</td>
 							<td width="0">&nbsp;</td>
 						</tr>
 						<tr height="1" bgcolor="#dddddd">
 							<td colspan="4" width="407"></td>
 						</tr>
 						<tr>
-							<!--조회수-->
+							<!--작성일/조회수-->
 							<td width="0">&nbsp;</td>
-							<td align="center" width="76">조회수</td>
-							<td width="319">${dto.board_readcount}</td>
+							<td align="center" width="76">작성일:</td>
+							<td width="">${dto.board_date}</td>
+							<td align="center" width="100">조회수: ${dto.board_readcount}</td>
 							<td width="0">&nbsp;</td>
 						</tr>
 						<tr height="1" bgcolor="#dddddd">
@@ -60,18 +50,8 @@
 						<tr>
 							<!--아이디-->
 							<td width="0">&nbsp;</td>
-							<td align="center" width="76">아이디</td>
+							<td align="center" width="76">아이디:</td>
 							<td width="319">${dto.user_id}</td>
-							<td width="0">&nbsp;</td>
-						</tr>
-						<tr height="1" bgcolor="#dddddd">
-							<td colspan="4" width="407"></td>
-						</tr>
-						<tr>
-							<!--작성일-->
-							<td width="0">&nbsp;</td>
-							<td align="center" width="76">작성일</td>
-							<td width="319">${dto.board_date }</td>
 							<td width="0">&nbsp;</td>
 						</tr>
 						<tr height="1" bgcolor="#dddddd">
@@ -80,8 +60,18 @@
 						<tr>
 							<!--제목-->
 							<td width="0">&nbsp;</td>
-							<td align="center" width="76">제목</td>
+							<td align="center" width="76">제목:</td>
 							<td width="319">${dto.board_subject}</td>
+							<td width="0">&nbsp;</td>
+						</tr>
+						<tr height="1" bgcolor="#dddddd">
+							<td colspan="4" width="407"></td>
+						</tr>
+						<tr>
+							<!--첨부파일-->
+							<td width="0">&nbsp;</td>
+							<td align="center" width="140">첨부파일:</td>
+							<td width="319"><a href="download?num=${dto.board_num}">${dto.board_upload}</a></td>
 							<td width="0">&nbsp;</td>
 						</tr>
 						<tr height="1" bgcolor="#dddddd">

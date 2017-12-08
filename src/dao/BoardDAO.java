@@ -56,7 +56,7 @@ public class BoardDAO {
 		List<BoardDTO> aList = new ArrayList<BoardDTO>();
 		try {
 			conn = init();
-			String sql = "select * from board";
+			String sql = "select * from board order by board_num desc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
