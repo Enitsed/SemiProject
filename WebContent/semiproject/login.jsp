@@ -1,20 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>소통 : 로그인</title>
 
 <style type="text/css">
 .form-horizontal {
@@ -34,43 +25,61 @@
 	width: 200px;
 }
 </style>
-<script type="text/javascript">
-    $(document).ready(function() {
-	$('#signUp').on('click', function() {
-	    location.href = '/semiproject/board/join';
-	});
-    });
-</script>
 </head>
 <body>
-	<form class="form-horizontal" action="/semiproject/main/login_check"
-		method="post">
-		<div class="form-group">
-			<div class="col-sm-10">
-				<input type="text" class="form-control" id="id" name="id"
-					placeholder="ID">
-			</div>
+
+	<div id="templatemo_wrapper">
+		<jsp:include page="../semiproject/header.jsp" />
+		<!-- end of templatemo_menu -->
+		<script type="text/javascript">
+	    $(document).on("load", function() {
+
+		$('#signUp').on('click', function() {
+		    location.href = '/semiproject/board/join';
+		});
+	    });
+	</script>
+		<div id="templatemo_main" align="center">
+			<form action="/semiproject/main/login_check" method="post"
+				name="log_f" id="login_f">
+				<fieldset style="width: 500px; height: 380px" align="center">
+					<h1>
+						<a href="#"><img src="../semiproject/images/loginlogo.png"
+							alt="로그인로고" /></a>
+					</h1>
+					<p class="user_id" align="center">
+						<label for="id"> </label> <input type="text" name="id" id="id"
+							style="width: 400px; height: 50px; letter-spacing: 0px"
+							placeholder="아이디" />
+					</p>
+					<p class="user_pw" align="center">
+						<label for="user_pw"> </label> <input type="password"
+							name="password" id="password"
+							style="width: 400px; height: 50px; letter-spacing: 0px"
+							placeholder="비밀번호" />
+					</p>
+					<p class="log_btn" align="center">
+						<input type="image" src="../semiproject/images/login_btn.gif"
+							alt="로그인버튼" width="400px" height="50px" id="log_btn" />
+					</p>
+					<p>
+						<input type="checkbox" name="save_id" id="save_id" /> <label
+							for="save_id"> 비밀번호 저장</label>
+					</p>
+					<hr>
+					<br>
+					<p class="join_btn_wrap">
+						<span> <a href="#" class="sch_id_btn">아이디/비밀번호 찾기</a>
+							&nbsp;&nbsp;/&nbsp;&nbsp;
+						</span> <a href="#" id="inputform">회원가입</a>
+					</p>
+				</fieldset>
+			</form>
 		</div>
-		<div class="form-group">
-			<div class="col-sm-10">
-				<input type="password" class="form-control" id="password"
-					name="password" placeholder="Password">
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<div class="checkbox">
-					<label> <input type="checkbox"> 아이디 저장
-					</label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default">로그인</button>
-				<button type="button" class="btn btn-success" id="signUp">회원가입</button>
-			</div>
-		</div>
-	</form>
+		<!-- END of templatemo_main -->
+	</div>
+	<!-- END of templatemo_wrapper -->
+	<jsp:include page="../semiproject/footer.jsp" />
+	<!-- END of templatemo_footer_wrapper -->
 </body>
 </html>

@@ -13,32 +13,32 @@
 			<h4>Photo Gallery</h4>
 			<ul class="footer_gallery">
 				<li><a href="../semiproject/images/Gallery01_1.jpg"
-					rel="gallery"> <img
-						src="../semiproject/images/Gallery01.jpg" alt="image 6" /></a></li>
+					rel="gallery"> <img src="../semiproject/images/Gallery01.jpg"
+						alt="image 6" /></a></li>
 				<li><a href="../semiproject/images/Gallery02_1.jpg"
-					rel="gallery"> <img
-						src="../semiproject/images/Gallery02.jpg" alt="image 7" /></a></li>
+					rel="gallery"> <img src="../semiproject/images/Gallery02.jpg"
+						alt="image 7" /></a></li>
 				<li><a href="../semiproject/images/Gallery03_1.jpg"
-					rel="gallery"> <img
-						src="../semiproject/images/Gallery03.jpg" alt="image 7" /></a></li>
+					rel="gallery"> <img src="../semiproject/images/Gallery03.jpg"
+						alt="image 7" /></a></li>
 				<li><a href="../semiproject/images/Gallery04_1.jpg"
-					rel="gallery"><img
-						src="../semiproject/images/Gallery04.jpg" alt="image 9" /></a></li>
+					rel="gallery"><img src="../semiproject/images/Gallery04.jpg"
+						alt="image 9" /></a></li>
 				<li><a href="../semiproject/images/Gallery05_1.jpg"
-					rel="gallery"><img
-						src="../semiproject/images/Gallery05.jpg" alt="image 10" /></a></li>
+					rel="gallery"><img src="../semiproject/images/Gallery05.jpg"
+						alt="image 10" /></a></li>
 				<li><a href="../semiproject/images/Gallery06_1.jpg"
-					rel="gallery"><img
-						src="../semiproject/images/Gallery06.jpg" alt="image 11" /></a></li>
+					rel="gallery"><img src="../semiproject/images/Gallery06.jpg"
+						alt="image 11" /></a></li>
 				<li><a href="../semiproject/images/Gallery07_1.jpg"
-					rel="gallery"><img
-						src="../semiproject/images/Gallery07.jpg" alt="image 12" /></a></li>
+					rel="gallery"><img src="../semiproject/images/Gallery07.jpg"
+						alt="image 12" /></a></li>
 				<li><a href="../semiproject/images/Gallery08_1.jpg"
-					rel="gallery"><img
-						src="../semiproject/images/Gallery08.jpg" alt="image 13" /></a></li>
+					rel="gallery"><img src="../semiproject/images/Gallery08.jpg"
+						alt="image 13" /></a></li>
 				<li><a href="../semiproject/images/Gallery09_1.jpg"
-					rel="gallery"><img
-						src="../semiproject/images/Gallery09.jpg" alt="image 14" /></a></li>
+					rel="gallery"><img src="../semiproject/images/Gallery09.jpg"
+						alt="image 14" /></a></li>
 
 			</ul>
 			<div class="clear"></div>
@@ -77,10 +77,9 @@
 </div>
 <!-- END of templatemo_bottom_wrapper -->
 <div id="templatemo_footer_wrapper">
+
 	<div id="templatemo_footer">
-		<p>
-			Copyright © 2072 <a href="#">Company Name</a>
-		</p>
+		KH정보교육원 © 2017 <a href="../semiproject/index.jsp">Communication</a>
 	</div>
 	<!-- END of templatemo_footer -->
 </div>

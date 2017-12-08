@@ -38,6 +38,13 @@
 	contentsource : "markup" //"markup" or ["container_id", "path_to_menu_file"]
     })
 
+    function clearText(field) {
+	if (field.defaultValue == field.value)
+	    field.value = '';
+	else if (field.value == '')
+	    field.value = field.defaultValue;
+    }
+
     $(function() {
 	// 로그아웃
 	$('#logout').on('click', function() {
@@ -63,6 +70,10 @@
 <link rel="stylesheet"
 	href="../semiproject/css/jquery.fancybox-1.3.4.css" type="text/css"
 	media="screen" />
+<link rel="stylesheet" href="../semiproject/css/slimbox2.css"
+	type="text/css" media="screen" />
+<script type="text/JavaScript" src="../semiproject/js/slimbox2.js"></script>
+<script type="text/JavaScript" src="../semiproject/js/autoload.js"></script>
 
 <script type="text/javascript">
     $(window).on('load', function() {
@@ -205,8 +216,8 @@
 					</ul></li>
 			</ul></li>
 		<li><a href="../semiproject/gallery.jsp">갤러리</a></li>
-		<li><a href="../semiproject/blog.jsp">Blog</a></li>
-		<li><a href="../semiproject/contact.jsp">Contact</a></li>
+		<li><a href="../semiproject/blog.jsp">블로그</a></li>
+		<li><a href="../semiproject/contact.jsp">문의 사항</a></li>
 		<li><a href="../main/board">게시판</a></li>
 
 	</ul>
