@@ -85,7 +85,15 @@ public class UserAction {
 		dto.setUser_email(user_email);
 
 		UserDAO dao = UserDAO.getInstance();
+		HashMap<String, String> memInfo = new HashMap<>();
+		memInfo.put("user_id", user_id);
+		memInfo.put("user_pw", user_pw);
+
+		if (!dao.memChk(memInfo))
+			return;
+
 		dao.insertMethod(dto);
+
 	} // end signUp();
 
 } // end class

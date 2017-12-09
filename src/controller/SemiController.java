@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.BoardAction;
 import action.UserAction;
+import dto.UserDTO;
 
 @WebServlet("/main/*")
 public class SemiController extends HttpServlet {
@@ -60,7 +61,24 @@ public class SemiController extends HttpServlet {
 			boardAction.execute(req, resp);
 			path = "/semiproject/view.jsp";
 		} else if (action.equals("/download")) {
+			// 첨부파일 다운로드
 			command = "download";
+			req.setAttribute("command", command);
+			boardAction.execute(req, resp);
+		} else if (action.equals("/delete")) {
+			// 글 삭제
+			command = "delete";
+			req.setAttribute("command", command);
+			boardAction.execute(req, resp);
+		} else if (action.equals("/update")) {
+			// 글 수정창 으로 이동
+			command = "update";
+			req.setAttribute("command", command);
+			boardAction.execute(req, resp);
+			path = "/semiproject/modify.jsp";
+		} else if (action.equals("/modify")) {
+			// 글 수정
+			command = "modify";
 			req.setAttribute("command", command);
 			boardAction.execute(req, resp);
 		}

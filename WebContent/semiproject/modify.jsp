@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,8 +30,16 @@
 			});
 
 		$('#write').on('click', function() {
+		    $('form').attr('action','/semiproject/main/write');
 		    $('form').submit();
 		})
+		
+		$('#list').on('click', function() {
+		    $('form').attr('action','/semiproject/main/board');
+		    $('form').submit();
+		})
+		
+		
 	    });
 </script>
 </head>
@@ -50,43 +58,52 @@
 						<tbody>
 							<tr>
 								<th>지역:</th>
-								<td><select id="city_menu" name="city_menu"
-									class="form-control">
-										<option value="">도시를선택하세요</option>
-										<option value="01">서울</option>
-										<option value="02">경기</option>
-								</select> <select id="sub" class="form-control" name="loc_menu">
-										<option value="">지역을선택하세요</option>
-								</select></td>
+								<td>
+									<select id="city_menu" name="city_menu" class="form-control">
+											<option value="">도시를선택하세요</option>
+											<option value="01">서울</option>
+											<option value="02">경기</option>
+									</select>
+									<select id="sub" class="form-control" name="loc_menu">
+											<option value="">지역을선택하세요</option>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<th>분류:</th>
-								<td><select id="category_menu" name="category_menu"
-									class="form-control">
-										<option value="">분류를선택하세요</option>
-										<option value="연애">연애</option>
-										<option value="스터디">스터디</option>
-										<option value="맛집">맛집</option>
-										<option value="질문게시판">질문게시판</option>
-								</select></td>
+								<td>
+									<select id="category_menu" name="category_menu" class="form-control">
+											<option value="">분류를선택하세요</option>
+											<option value="연애">연애</option>
+											<option value="스터디">스터디</option>
+											<option value="맛집">맛집</option>
+											<option value="질문게시판">질문게시판</option>
+									</select>
+								</td>
 							<tr>
 								<th>제목:</th>
-								<td><input type="text" class="form-control"
-									placeholder="제목을 입력하세요." name="subject" /></td>
+								<td>
+									<input type="text" class="form-control" placeholder="제목을 입력하세요." name="subject" value="" />
+								</td>
 							</tr>
 							<tr>
 								<th>글쓴이:</th>
-								<td width="80%"><input type="text" name="writer"
-									value="${memberInfo.user_id }" disabled="disabled" /></td>
+								<td width="80%"><input type="text" name="writer" value="${dto.user_id }" disabled="disabled" />
+								</td>
 							</tr>
 							<tr>
 								<th>내용:</th>
-								<td><textarea class="form-control" rows="10"
-										placeholder="내용을 입력하세요. " name="content"></textarea></td>
+								<td>
+									<textarea class="form-control" rows="10" name="content">
+									<c:out value="${dto.board_content }"></c:out>
+									</textarea>
+								</td>
 							</tr>
 							<tr>
 								<th>첨부파일:</th>
-								<td><input type="file" class="form-control" name="upload" /></td>
+								<td>
+									<input type="file" class="form-control" name="upload" value="${dto.board_upload }" />
+								</td>
 							</tr>
 
 							<tr>

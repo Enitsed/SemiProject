@@ -18,46 +18,74 @@
 				<p class="">서울 강남구</p>
 				<h1>카테고리</h1>
 				<div class="list-group">
-					<a href="#" class="list-group-item">연애 <span
-						class="label label-default">New</span></a> <a href="#"
-						class="list-group-item">스터디 <span class="label label-default">New</span></a>
-					<a href="#" class="list-group-item">맛집 <span
-						class="label label-default">New</span></a> <a href="#"
-						class="list-group-item">질문게시판 <span
-						class="label label-default">New</span></a>
+					<c:url var="category" value="board">
+						<c:param name="category" value=""></c:param>
+					</c:url>
+					<a href="${category }" class="list-group-item">연애 
+						<span class="label label-default">New</span>
+					</a>
+					<a href="${category }" class="list-group-item">스터디
+						<span class="label label-default">New</span>
+					</a>
+					<a href="${category }" class="list-group-item">맛집
+						<span class="label label-default">New</span>
+					</a>
+					<a href="${category }" class="list-group-item">질문게시판
+						<span class="label label-default">New</span>
+					</a>
 				</div>
 
 			</div>
 
 			<div class="article">
-				<c:forEach items="${requestScope.aList }" var="dto">
-					<article>
-						<c:url var="link" value="view">
-							<c:param name="num" value="${dto.board_num}" />
-						</c:url>
-						<a href="${link}"> <img
-							src="../semiproject/upload/${dto.board_upload }"
-							class="img-rounded" /> <span>[ ${dto.board_category}]
-								${dto.board_subject }</span> <span class="badge">${dto.board_readcount }</span>
-							${dto.board_date }
-						</a>
-					</article>
-				</c:forEach>
-
+				<c:choose>
+					<c:when test="${empty aList }">
+						<h1>등록된 글이 없습니다</h1>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${requestScope.aList }" var="dto">
+							<article>
+								<c:url var="link" value="view">
+									<c:param name="num" value="${dto.board_num}" />
+								</c:url>
+								
+								<a href="${link}"> 
+								<c:choose>
+									<c:when test="${empty dto.board_upload }">
+										<img src="../semiproject/images/noimage.gif" class="img-rounded" />
+									</c:when>
+									<c:otherwise>
+										<img src="../semiproject/upload/${dto.board_upload }" class="img-rounded" />
+									</c:otherwise>
+								</c:choose>
+								<span>[ ${dto.board_category}] ${dto.board_subject }</span>
+								<span class="badge">${dto.board_readcount }</span>
+								<span>${dto.board_date }</span>
+								</a>
+							</article>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+				
 				<hr class="clear" />
 
 				<nav aria-label="Page navigation">
 					<ul class="pagination">
-						<li><a href="#" aria-label="Previous"> <span
-								aria-hidden="true">&laquo;</span>
-						</a></li>
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
 						<li><a href="#">1</a></li>
 						<li><a href="#">2</a></li>
-						<li><a href="#" aria-label="Next"> <span
-								aria-hidden="true">&raquo;</span>
-						</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
 					</ul>
 				</nav>
+				
 				<div class="form-group">
 					<form class="form-group">
 						<select name="searchKey" class="form-control">

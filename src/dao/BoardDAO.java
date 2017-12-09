@@ -11,7 +11,6 @@ import java.util.List;
 
 import dao.BoardDAO;
 import dto.BoardDTO;
-import dto.UserDTO;
 
 public class BoardDAO {
 	private Connection conn;

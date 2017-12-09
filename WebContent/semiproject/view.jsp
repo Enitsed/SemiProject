@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,14 +13,44 @@
 		<!--header-->
 		<jsp:include page="../semiproject/header.jsp"></jsp:include>
 
-		<script type="text/javascript">
+	<script type="text/javascript">
 	    $(document).ready(function() {
-		$('.list').on('click', function() {
-		    $('form').attr('action', 'board');
-		    $('form').submit();
-		});
+		
+			var getUrlParameter = function getUrlParameter(sParam) {
+			    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+			        sURLVariables = sPageURL.split('&'),
+			        sParameterName,
+			        i;
+			    for (i = 0; i < sURLVariables.length; i++) {
+			        sParameterName = sURLVariables[i].split('=');
+			        if (sParameterName[0] === sParam) {
+			            return sParameterName[1] === undefined ? true : sParameterName[1];
+			        }
+			    }
+			};
+			var num = getUrlParameter('num');
+
+			$('.list').on('click', function() {
+			    $('form').attr('action', 'board');
+			    $('form').submit();
+			});
+			$('.update').on('click', function() {
+			    $('form').attr('action', 'update?num=' + num);
+			    $('form').submit();
+			});
+			$('.delete').on('click', function(){
+			    $('form').attr('action', 'delete');
+			    $('form').submit();
+			});
 	    });
 	</script>
+	<c:choose>
+		<c:when test="${empty dto }">
+			<div id="templatemo_main">
+				<h3> 회원이 아니면 글을 읽을 수 없습니다. 회원 가입을 해주세요. </h3>
+			</div>
+		</c:when>
+		<c:otherwise>
 		<!--상세보기폼 -->
 		<table align="center" height="400">
 			<tr>
@@ -94,9 +124,9 @@
 							<td colspan="2" width="399">
 								<form name="frm" method="post"
 									enctype="application/x-www-form-urlencoded">
-									<input type=button class="list" value="목록"> <input
-										type=button class="update" value="수정"> <input
-										type=button class="delete" value="삭제">
+									<input type=button class="list" value="목록"> 
+									<input type=button class="update" value="수정">
+									<input type=button class="delete" value="삭제">
 								</form>
 							<td width="0">&nbsp;</td>
 						</tr>
@@ -104,6 +134,8 @@
 				</td>
 			</tr>
 		</table>
+		</c:otherwise>
+	</c:choose>
 	</div>
 
 	<!--footer-->

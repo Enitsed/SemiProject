@@ -85,11 +85,9 @@ public class UserDAO {
 					+ "'";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
-
 			while (rs.next()) {
 				user_id = rs.getString("user_id");
 				user_pw = rs.getString("user_pw");
-
 				return true;
 			}
 
@@ -102,9 +100,7 @@ public class UserDAO {
 				e.printStackTrace();
 			}
 		}
-
 		return false;
-
 	} // end memChk(); 멤버 여부 확인
 
 	public UserDTO getMemInfo(HashMap<String, String> memInfo) {
