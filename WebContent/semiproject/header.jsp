@@ -98,7 +98,7 @@
 	</div>
 	<div id="templatemo_search">
 		<c:choose>
-			<c:when test="${isMember==true }">
+			<c:when test="${isMember==true && memberInfo ne null }">
 				<span style="color: red;"> 어서오세요. ${memberInfo.user_id } 님</span>
 				<button class="btn btn-default" type="submit" id="logout">로그아웃</button>
 			</c:when>

@@ -29,14 +29,16 @@
 <body>
 
 	<div id="templatemo_wrapper">
-		<jsp:include page="../semiproject/header.jsp" />
+		<jsp:include page="../semiproject/header.jsp" >
+			<jsp:param value="${isMember }" name="isMember" />
+			<jsp:param value="${memberInfo }" name="dto" />
+		</jsp:include>
 		<!-- end of templatemo_menu -->
 		<script type="text/javascript">
 	    $(document).on("load", function() {
-
-		$('#signUp').on('click', function() {
-		    location.href = '/semiproject/board/join';
-		});
+			$('#signUp').on('click', function() {
+			    location.href = '/semiproject/board/join';
+			});
 	    });
 	</script>
 		<div id="templatemo_main" align="center">
@@ -71,7 +73,7 @@
 					<p class="join_btn_wrap">
 						<span> <a href="#" class="sch_id_btn">아이디/비밀번호 찾기</a>
 							&nbsp;&nbsp;/&nbsp;&nbsp;
-						</span> <a href="#" id="inputform">회원가입</a>
+						</span> <a href="/semiproject/main/join" id="signUp">회원가입</a>
 					</p>
 				</fieldset>
 			</form>

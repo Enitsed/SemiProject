@@ -8,10 +8,7 @@
 <title>게시판</title>
 <body>
 	<div id="templatemo_wrapper">
-		<jsp:include page="../semiproject/header.jsp">
-			<jsp:param value="${isMember }" name="isMember" />
-			<jsp:param value="${memberInfo }" name="dto" />
-		</jsp:include>
+		<jsp:include page="../semiproject/header.jsp" />
 
 		<div id="templatemo_main">
 			<div class="navbar container">

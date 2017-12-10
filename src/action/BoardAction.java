@@ -65,7 +65,8 @@ public class BoardAction {
 			resp.setHeader("Content-Disposition", "attachment;filename=" + convName + ";");
 			// String saveDirectory = req.getRealPath("/");
 			// File file = new File(saveDirectory + "/temp/" + filename);
-			File file = new File("c:/temp/" + filename);
+			File file = new File(
+					req.getSession().getServletContext().getRealPath("/") + "semiproject\\upload\\" + filename);
 			// 서버의 파일첨부 읽어오기
 			FileInputStream is = new FileInputStream(file);
 			BufferedInputStream bs = new BufferedInputStream(is);
@@ -94,17 +95,32 @@ public class BoardAction {
 
 	private void deleteAction(HttpServletRequest req, HttpServletResponse resp, Boolean isMember) {
 		HttpSession session = req.getSession();
+		Boolean isWriter = (Boolean) session.getAttribute("isWriter");
 		BoardDAO dao = BoardDAO.getInstance();
-		BoardDTO dto = dao.viewMethod(Integer.parseInt(req.getParameter("num")));
-
-		if (isMember == null || !isMember)
+		int num = Integer.parseInt(req.getParameter("num"));
+		BoardDTO bdto = dao.viewMethod(num);
+		String saveDirectory = req.getSession().getServletContext().getRealPath("/") + "semiproject/upload";
+		String filePath = bdto.getBoard_upload();
+		if (isMember == null || !isMember || !isWriter)
 			return;
+
+		if (filePath != null) {
+			File file = new File(saveDirectory, filePath);
+			file.delete();
+		}
+
+		dao.deleteMethod(num);
 
 	} // end deleteAction()
 
 	private void modifyAction(HttpServletRequest req, HttpServletResponse resp, Boolean isMember) {
 		int num = Integer.parseInt(req.getParameter("num"));
-		if (isMember == null || !isMember)
+		HttpSession session = req.getSession();
+		Boolean isWriter = (Boolean) session.getAttribute("isWriter");
+		BoardDAO dao = BoardDAO.getInstance();
+		BoardDTO bdto = dao.viewMethod(num);
+
+		if (isMember == null || !isMember || !isWriter)
 			return;
 
 	} // end modifyAction()
@@ -112,7 +128,7 @@ public class BoardAction {
 	private void writeAction(HttpServletRequest req, HttpServletResponse resp, Boolean isMember) {
 		MultipartRequest multi = null;
 		HttpSession session = req.getSession();
-		String saveDirectory = session.getServletContext().getRealPath("/") + "/semiproject/upload";
+		String saveDirectory = session.getServletContext().getRealPath("/") + "semiproject/upload";
 		File file = new File(saveDirectory);
 		if (!file.exists())
 			file.mkdir();
@@ -147,12 +163,23 @@ public class BoardAction {
 		int num = Integer.parseInt(req.getParameter("num"));
 		BoardDAO dao = BoardDAO.getInstance();
 
+		HttpSession session = req.getSession();
+		UserDTO udto = (UserDTO) session.getAttribute("memberInfo");
+		BoardDTO bdto = dao.viewMethod(num);
+		Boolean isWriter = false;
+
+		if (udto != null) {
+			String connectedUserId = udto.getUser_id();
+			isWriter = (connectedUserId.equals(bdto.getUser_id())) ? true : false;
+		}
+
+		session.setAttribute("isWriter", isWriter);
+
 		if (isMember == null || !isMember)
 			return;
 
 		dao.readCountMethod(num);
-		req.setAttribute("dto", dao.viewMethod(num));
-
+		req.setAttribute("dto", bdto);
 	} // end viewAction();
 
 	private void listAction(HttpServletRequest req, HttpServletResponse resp) {

@@ -174,7 +174,6 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 			if (rs.next())
 				filename = rs.getString("board_upload");
-
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -184,8 +183,25 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
-
 		return filename;
 	} // end fileMethod()
+
+	public void deleteMethod(int num) {
+		try {
+			conn = init();
+			String sql = "delete from board where board_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.execute();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				exit();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	} // end deleteMethod()
 
 } // end class

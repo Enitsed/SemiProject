@@ -70,6 +70,7 @@ public class SemiController extends HttpServlet {
 			command = "delete";
 			req.setAttribute("command", command);
 			boardAction.execute(req, resp);
+			resp.sendRedirect("/semiproject/main/board");
 		} else if (action.equals("/update")) {
 			// 글 수정창 으로 이동
 			command = "update";
@@ -90,9 +91,11 @@ public class SemiController extends HttpServlet {
 			path = "/semiproject/join.jsp";
 		} else if (action.equals("/signup")) {
 			// 회원가입 기능
+			System.out.println("회원가입");
 			command = "signup";
 			req.setAttribute("command", command);
 			userAction.execute(req, resp);
+			System.out.println("회원가입 완료");
 			path = "/semiproject/index.jsp";
 		} else if (action.equals("/login")) {
 			// 로그인 창으로 이동

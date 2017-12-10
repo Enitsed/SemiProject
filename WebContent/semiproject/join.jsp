@@ -87,8 +87,7 @@ select {
 		<jsp:include page="../semiproject/header.jsp"></jsp:include>
 
 		<div id="templatemo_main">
-			<form name="memberInfo" method="post"
-				action="/semiproject/main/signup">
+			<form name="memberInfo" method="post" action="/semiproject/main/signup">
 				<fieldset>
 					<legend>회원가입 정보 입력</legend>
 					<div class="form-row">

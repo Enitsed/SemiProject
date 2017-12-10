@@ -89,8 +89,9 @@ public class UserAction {
 		memInfo.put("user_id", user_id);
 		memInfo.put("user_pw", user_pw);
 
-		if (!dao.memChk(memInfo))
+		if (dao.memChk(memInfo)) {
 			return;
+		}
 
 		dao.insertMethod(dto);
 

@@ -39,7 +39,7 @@
 			    $('form').submit();
 			});
 			$('.delete').on('click', function(){
-			    $('form').attr('action', 'delete');
+			    $('form').attr('action', 'delete?num=' + num);
 			    $('form').submit();
 			});
 	    });
@@ -125,8 +125,10 @@
 								<form name="frm" method="post"
 									enctype="application/x-www-form-urlencoded">
 									<input type=button class="list" value="목록"> 
-									<input type=button class="update" value="수정">
-									<input type=button class="delete" value="삭제">
+									<c:if test="${isWriter == true}">
+										<input type=button class="update" value="수정">
+										<input type=button class="delete" value="삭제">
+									</c:if>
 								</form>
 							<td width="0">&nbsp;</td>
 						</tr>
