@@ -9,9 +9,9 @@
 
 </head>
 <body>
-	<div id="templatemo_wrapper">
-		<!--header-->
-		<jsp:include page="../semiproject/header.jsp"></jsp:include>
+	<div id="templatemo_wrapper" align="center">
+	<!--header-->
+	<jsp:include page="../semiproject/header.jsp"></jsp:include>
 
 	<script type="text/javascript">
 	    $(document).ready(function() {
@@ -30,6 +30,7 @@
 			};
 			var num = getUrlParameter('num');
 
+			// 게시판
 			$('.list').on('click', function() {
 			    $('form').attr('action', 'board');
 			    $('form').submit();
@@ -42,10 +43,21 @@
 			    $('form').attr('action', 'delete?num=' + num);
 			    $('form').submit();
 			});
+			
+			// 댓글
+			$('.reply').on('click', function() {
+				$('form').attr('action', 'reply');
+				$('form').submit();
+			});
+			$('.reply_delete').on('click', function(){
+				$('.reply_frm').attr('action', 'reply_delete');
+				$('.reply_frm').submit();
+			});
+
 	    });
 	</script>
 	<c:choose>
-		<c:when test="${empty dto || isMember eq false}">
+		<c:when test="${isMember eq false || memberInfo.user_id == null}">
 			<div id="templatemo_main">
 				<h3> 회원이 아니면 글을 읽을 수 없습니다. 회원 가입을 해주세요. </h3>
 			</div>
@@ -138,8 +150,81 @@
 		</table>
 		</c:otherwise>
 	</c:choose>
-	</div>
 
+	
+<!--------------------------------------------------------------------------------------------  -->
+    <c:if test="${memberInfo.user_id != null}"><!-- 댓글 부분 -->
+	<div id="comment">
+		<table border="1" bordercolor="lightgray">
+		<!-- 댓글 목록 -->   
+		<c:if test="${requestScope.rList != null}">
+			<c:forEach var="rList" items="${requestScope.rList}">
+			<tr>
+				<!-- 아이디, 작성날짜 -->
+				<td width="150">
+					<div>
+						${rList.user_id}<br>
+						<font size="2" color="lightgray">${rList.reply_date}</font>
+					</div>
+				</td>
+				<!-- 본문내용 -->
+				<td width="550">
+					<div class="text_wrapper">
+						${rList.reply_content}
+					</div>
+				</td>
+				<!-- 버튼 -->
+				<td width="100">
+					<form class="reply_frm">
+						<input type="hidden" name="reply_num" value="${rList.reply_num}">
+						<input type="hidden" name="num" value="${dto.board_num}">
+						<div id="btn" style="text-align:center;">
+							<a href="#">[답변]</a><br>
+							<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->   
+							<c:if test="${rList.user_id == memberInfo.user_id}">
+							<input type="button" class="reply_update" value="[수정]" />   
+							<input type="button" class="reply_delete" value="[삭제]" />
+							</c:if>
+						</div>
+					</form>
+				</td>
+			</tr>
+			</c:forEach>
+		</c:if>
+		
+		
+		<!-- 로그인 했을 경우만 댓글 작성가능 -->
+		<c:if test="${memberInfo.user_id != null}">
+		<tr bgcolor="#F5F5F5">
+			<form id="writeCommentForm">
+				<input type="hidden" name="num" value="${dto.board_num}">
+				<input type="hidden" name="comment_id" value="${memberInfo.user_id}">
+				<!-- 아이디-->
+				<td width="150">
+					<div>
+						${memberInfo.user_id}
+					</div>
+				</td>
+				<!-- 본문 작성-->
+				<td width="550">
+				   <div>
+				      <textarea name="comment_content" rows="4" cols="70" ></textarea>
+				   </div>
+				</td>
+				<!-- 댓글 등록 버튼 -->
+				<td width="100">
+					<div id="btn" style="text-align:center;">
+						<p><input type="button" class="reply" value="[댓글등록]"></p>   
+					</div>
+				</td>
+			</form>
+		</tr>
+		</c:if>
+	
+	   </table>
+	</div>
+	</c:if>
+</div>
 	<!--footer-->
 	<jsp:include page="../semiproject/footer.jsp"></jsp:include>
 </body>

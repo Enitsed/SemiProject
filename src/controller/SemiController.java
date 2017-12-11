@@ -40,7 +40,6 @@ public class SemiController extends HttpServlet {
 		}
 		////////////////////////////////////////////////////
 		// 게시판 기능
-
 		else if (action.equals("/board")) {
 			// 게시판 목록 조회하기 (수정필요 : 페이지네이션, )
 			command = "list";
@@ -79,6 +78,19 @@ public class SemiController extends HttpServlet {
 		} else if (action.equals("/modify")) {
 			// 글 수정
 			command = "modify";
+			req.setAttribute("command", command);
+			boardAction.execute(req, resp);
+		}
+		/////////////////////////////////////////////////
+		// 댓글 기능
+		else if (action.equals("/reply")) {
+			// 댓글등록
+			command = "reply";
+			req.setAttribute("command", command);
+			boardAction.execute(req, resp);
+		} else if (action.equals("/reply_delete")) {
+			// 댓글삭제
+			command = "reply_delete";
 			req.setAttribute("command", command);
 			boardAction.execute(req, resp);
 		}

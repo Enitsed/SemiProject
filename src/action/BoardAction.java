@@ -18,7 +18,9 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dao.BoardDAO;
+import dao.ReplyDAO;
 import dto.BoardDTO;
+import dto.ReplyDTO;
 import dto.UserDTO;
 
 public class BoardAction {
@@ -46,6 +48,24 @@ public class BoardAction {
 			MultipartRequest multi = modifyAction(req, resp, isMember, dto);
 			try {
 				resp.sendRedirect("view?num=" + multi.getParameter("num"));
+			} catch (NumberFormatException | IOException e) {
+				e.printStackTrace();
+			}
+
+			/////////////////////////// 댓글
+
+		} else if (command.equals("reply")) {
+			replyWriteAction(req, resp);
+			try {
+				resp.sendRedirect("/semiproject/main/view?num=" + Integer.parseInt(req.getParameter("num")));
+			} catch (NumberFormatException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (command.equals("reply_delete")) {
+			replyDeleteAction(req, resp);
+			try {
+				resp.sendRedirect("/semiproject/main/view?num=" + Integer.parseInt(req.getParameter("num")));
 			} catch (NumberFormatException | IOException e) {
 				e.printStackTrace();
 			}
@@ -144,7 +164,7 @@ public class BoardAction {
 		}
 
 		int num = Integer.parseInt(multi.getParameter("num"));
-		
+
 		// board 테이블에 첨부파일의 저장여부 검색
 		String filename = dao.fileMethod(num);
 
@@ -229,6 +249,11 @@ public class BoardAction {
 
 		dao.readCountMethod(num);
 		req.setAttribute("dto", bdto);
+
+		ReplyDAO rdao = ReplyDAO.getInstance();
+		List<ReplyDTO> rList = rdao.listMethod(num);
+		req.setAttribute("rList", rList);
+
 	} // end viewAction();
 
 	private void listAction(HttpServletRequest req, HttpServletResponse resp) {
@@ -238,5 +263,24 @@ public class BoardAction {
 		// 선택한 카테고리 파라미터 받고 해당 게시판만 보여주기 구현중
 
 	} // end listAction();
+
+	///////////////////////////////////// 댓글
+
+	private void replyWriteAction(HttpServletRequest req, HttpServletResponse resp) {
+		HttpSession session = req.getSession();
+		UserDTO udto = (UserDTO) session.getAttribute("memberInfo");
+		String user_id = udto.getUser_id();
+		int num = Integer.parseInt(req.getParameter("num"));
+		ReplyDTO rdto = new ReplyDTO();
+		rdto.setReply_content(req.getParameter("comment_content"));
+		ReplyDAO dao = ReplyDAO.getInstance();
+		dao.replyWriteMethod(user_id, rdto, num);
+	} /////////////////////////// 댓글등록
+
+	private void replyDeleteAction(HttpServletRequest req, HttpServletResponse resp) {
+		int num = Integer.parseInt(req.getParameter("reply_num"));
+		ReplyDAO dao = ReplyDAO.getInstance();
+		dao.replyDeleteMethod(num);
+	} /////////////// 댓글삭제
 
 } // end class
