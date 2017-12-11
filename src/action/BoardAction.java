@@ -26,23 +26,29 @@ public class BoardAction {
 		String command = req.getAttribute("command").toString();
 		HttpSession session = req.getSession();
 		Boolean isMember = (Boolean) session.getAttribute("isMember");
+		UserDTO dto = (UserDTO) session.getAttribute("memberInfo");
 
 		if (command.equals("list")) {
 			listAction(req, resp);
 		} else if (command.equals("view")) {
-			viewAction(req, resp, isMember);
+			viewAction(req, resp, isMember, dto);
 		} else if (command.equals("write")) {
-			writeAction(req, resp, isMember);
+			writeAction(req, resp, isMember, dto);
 		} else if (command.equals("delete")) {
-			deleteAction(req, resp, isMember);
+			deleteAction(req, resp, isMember, dto);
 		} else if (command.equals("download")) {
 			fileDownloadAction(req, resp, isMember);
-		} else if (command.equals("modify")) {
+		} else if (command.equals("update")) {
 			int num = Integer.parseInt(req.getParameter("num"));
 			BoardDAO dao = BoardDAO.getInstance();
 			req.setAttribute("dto", dao.viewMethod(num));
 		} else if (command.equals("modify")) {
-			modifyAction(req, resp, isMember);
+			MultipartRequest multi = modifyAction(req, resp, isMember, dto);
+			try {
+				resp.sendRedirect("view?num=" + multi.getParameter("num"));
+			} catch (NumberFormatException | IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 	} // end execute();
@@ -93,7 +99,7 @@ public class BoardAction {
 
 	} // end downloadAction()
 
-	private void deleteAction(HttpServletRequest req, HttpServletResponse resp, Boolean isMember) {
+	private void deleteAction(HttpServletRequest req, HttpServletResponse resp, Boolean isMember, UserDTO dto) {
 		HttpSession session = req.getSession();
 		Boolean isWriter = (Boolean) session.getAttribute("isWriter");
 		BoardDAO dao = BoardDAO.getInstance();
@@ -113,19 +119,62 @@ public class BoardAction {
 
 	} // end deleteAction()
 
-	private void modifyAction(HttpServletRequest req, HttpServletResponse resp, Boolean isMember) {
-		int num = Integer.parseInt(req.getParameter("num"));
+	private MultipartRequest modifyAction(HttpServletRequest req, HttpServletResponse resp, Boolean isMember,
+			UserDTO dto) {
+		MultipartRequest multi = null;
 		HttpSession session = req.getSession();
 		Boolean isWriter = (Boolean) session.getAttribute("isWriter");
 		BoardDAO dao = BoardDAO.getInstance();
-		BoardDTO bdto = dao.viewMethod(num);
+		String saveDirectory = session.getServletContext().getRealPath("/") + "semiproject/upload";
+		File file = new File(saveDirectory);
+		if (!file.exists())
+			file.mkdir();
+		int maxPostSize = 1000000000; // 1GB
+		String encoding = "UTF-8";
+
+		BoardDTO bdto = new BoardDTO();
 
 		if (isMember == null || !isMember || !isWriter)
-			return;
+			return null;
 
+		try {
+			multi = new MultipartRequest(req, saveDirectory, maxPostSize, encoding, new DefaultFileRenamePolicy());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		int num = Integer.parseInt(multi.getParameter("num"));
+		
+		// board 테이블에 첨부파일의 저장여부 검색
+		String filename = dao.fileMethod(num);
+
+		// 수정 첨부파일이 있으면
+		if (multi.getFilesystemName("upload") != null) {
+			// board 테이블에 첨부파일이 저장이 되어 있으면
+			if (filename != null) {
+				// board 테이블의 첨부파일을 삭제
+				File file2 = new File(saveDirectory, filename);
+				file2.delete();
+			}
+			bdto.setBoard_upload(multi.getFilesystemName("upload"));
+		} else {
+			// 수정 첨부파일이 없으면
+			if (filename != null) {
+				bdto.setBoard_upload(filename);
+			}
+		}
+		bdto.setBoard_subject(multi.getParameter("subject"));
+		bdto.setBoard_content(multi.getParameter("content"));
+		bdto.setBoard_loc_city_code(Integer.parseInt(multi.getParameter("city_menu")));
+		bdto.setBoard_loc_code(Integer.parseInt(multi.getParameter("loc_menu")));
+		bdto.setBoard_category(multi.getParameter("category_menu"));
+		bdto.setBoard_num(num);
+		dao.updateMethod(bdto);
+
+		return multi;
 	} // end modifyAction()
 
-	private void writeAction(HttpServletRequest req, HttpServletResponse resp, Boolean isMember) {
+	private void writeAction(HttpServletRequest req, HttpServletResponse resp, Boolean isMember, UserDTO dto) {
 		MultipartRequest multi = null;
 		HttpSession session = req.getSession();
 		String saveDirectory = session.getServletContext().getRealPath("/") + "semiproject/upload";
@@ -159,7 +208,7 @@ public class BoardAction {
 
 	} // end writeAction();
 
-	private void viewAction(HttpServletRequest req, HttpServletResponse resp, Boolean isMember) {
+	private void viewAction(HttpServletRequest req, HttpServletResponse resp, Boolean isMember, UserDTO dto) {
 		int num = Integer.parseInt(req.getParameter("num"));
 		BoardDAO dao = BoardDAO.getInstance();
 

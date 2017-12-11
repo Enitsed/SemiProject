@@ -204,4 +204,28 @@ public class BoardDAO {
 		}
 	} // end deleteMethod()
 
+	public void updateMethod(BoardDTO boardDto) {
+		try {
+			conn = init();
+			String sql = "update board set board_subject=?, board_upload=?, board_content=?, board_loc_city_code=?, board_loc_code=?, board_category=? where board_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardDto.getBoard_subject());
+			pstmt.setString(2, boardDto.getBoard_upload());
+			pstmt.setString(3, boardDto.getBoard_content());
+			pstmt.setInt(4, boardDto.getBoard_loc_city_code());
+			pstmt.setInt(5, boardDto.getBoard_loc_code());
+			pstmt.setString(6, boardDto.getBoard_category());
+			pstmt.setInt(7, boardDto.getBoard_num());
+			System.out.println(boardDto.getBoard_num());
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				exit();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	} // end updateMethod()
 } // end class

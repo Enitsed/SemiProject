@@ -29,12 +29,12 @@ create table board(
    board_content varchar2(300) not null,
    board_loc_code number not null,
    board_loc_city_code number not null,
-   board_category varchar2(10) not null
+   board_category varchar2(50) not null
 );
 select * from board
 insert into board values('lhs5', board_seq.nextval, '다섯번째', sysdate, 1, null,'안녕하세요', 1, 1, '연애')
 create sequence board_seq start with 1 increment by 1 nocache nocycle;
-
+update board set board_subject='asdasd', board_content='asdasdasd', board_loc_city_code=1, board_loc_code=2, board_category='연애' where board_num=15
 drop sequence board_seq
 drop table board
 
@@ -53,13 +53,14 @@ drop table board_re
 create table reply(
    user_id varchar2(20) CONSTRAINTS reply_user_id_fk REFERENCES users(user_id) on delete cascade,
    board_num number CONSTRAINTS reply_board_num_fk REFERENCES board(board_num) on delete cascade,
+   reply_num number constraint reply_num_pk primary key,
    reply_content varchar2(300) not null,
    reply_date date not null
 );
 select * from reply
 drop table reply
 
-
+create sequence reply_seq start with 1 increment by 1 nocache nocycle;
 
 insert into users
  values(user_seq.nextval,'홍길동','홍길동','홍길동','남','g@g.com','서울', '010-8958-0333', '20170123', sysdate);

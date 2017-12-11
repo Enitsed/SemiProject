@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Write something else you want</title>
+<title>글 조회</title>
 
 </head>
 <body>
@@ -45,7 +45,7 @@
 	    });
 	</script>
 	<c:choose>
-		<c:when test="${empty dto }">
+		<c:when test="${empty dto || isMember eq false}">
 			<div id="templatemo_main">
 				<h3> 회원이 아니면 글을 읽을 수 없습니다. 회원 가입을 해주세요. </h3>
 			</div>

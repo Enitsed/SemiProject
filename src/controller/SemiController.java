@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.BoardAction;
 import action.UserAction;
-import dto.UserDTO;
 
 @WebServlet("/main/*")
 public class SemiController extends HttpServlet {
