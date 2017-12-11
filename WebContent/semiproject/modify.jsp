@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 		<div id="templatemo_main">
 			<div class="container">
-				<form name="frm" action="/semiproject/main/modify?num=${num }" method="post" encType="multipart/form-data">
+				<form name="frm" action="/semiproject/main/modify" method="post" encType="multipart/form-data">
 					<table class="table table-bordered">
 						<caption>글쓰기</caption>
 						<tbody>
