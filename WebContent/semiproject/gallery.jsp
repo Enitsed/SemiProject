@@ -17,9 +17,9 @@
 			<div id="gallery">
 				<div class="col one_fourth gallery_box">
 					<div class="img_frame img_frame_14 img_nom">
-						<span></span> <a href="images/portfolio/01-l.jpg"
+						<span></span> <a href="../semiproject/images/portfolio/01-l.jpg"
 							rel="lightbox[new_gallery]"><img
-							src="images/portfolio/01.jpg" alt="Gallery Item 1" /></a>
+							src="../semiproject/images/portfolio/01.jpg" alt="Gallery Item 1" /></a>
 					</div>
 					<h4>양평 두물머리</h4>
 					<p>경기도 양평군 양서면 두물머리길 125</p>
@@ -29,9 +29,9 @@
 				</div>
 				<div class="col one_fourth gallery_box">
 					<div class="img_frame img_frame_14 img_nom">
-						<span></span> <a href="images/portfolio/02-l.jpg"
+						<span></span> <a href="../semiproject/images/portfolio/02-l.jpg"
 							rel="lightbox[new_gallery]"><img
-							src="images/portfolio/02.jpg" alt="Gallery Item 2" /></a>
+							src="../semiproject/images/portfolio/02.jpg" alt="Gallery Item 2" /></a>
 					</div>
 					<h4>광교호수공원</h4>
 					<p>경기도 수원시 영통구 광교호수로 57</p>
@@ -39,9 +39,9 @@
 				</div>
 				<div class="col one_fourth gallery_box">
 					<div class="img_frame img_frame_14 img_nom">
-						<span></span> <a href="images/portfolio/03-l.jpg"
+						<span></span> <a href="../semiproject/images/portfolio/03-l.jpg"
 							rel="lightbox[new_gallery]"><img
-							src="images/portfolio/03.jpg" alt="Gallery Item 3" /></a>
+							src="../semiproject/images/portfolio/03.jpg" alt="Gallery Item 3" /></a>
 					</div>
 					<h4>수원 화성</h4>
 					<p>경기도 수원시 팔달구 장안동 1-2번지</p>
@@ -49,9 +49,9 @@
 				</div>
 				<div class="col one_fourth gallery_box no_margin_right">
 					<div class="img_frame img_frame_14 img_nom">
-						<span></span> <a href="images/portfolio/04-l.jpg"
+						<span></span> <a href="../semiproject/images/portfolio/04-l.jpg"
 							rel="lightbox[new_gallery]"><img
-							src="images/portfolio/04.jpg" alt="Gallery Item 4" /></a>
+							src="../semiproject/images/portfolio/04.jpg" alt="Gallery Item 4" /></a>
 					</div>
 					<h4>분당 중앙공원</h4>
 					<p>경기도 성남시 분당구 성남대로 550</p>
@@ -61,9 +61,9 @@
 				</div>
 				<div class="col one_fourth gallery_box">
 					<div class="img_frame img_frame_14 img_nom">
-						<span></span> <a href="images/portfolio/05-l.jpg"
+						<span></span> <a href="../semiproject/images/portfolio/05-l.jpg"
 							rel="lightbox[new_gallery]"><img
-							src="images/portfolio/05.jpg" alt="Gallery Item 5" /></a>
+							src="../semiproject/images/portfolio/05.jpg" alt="Gallery Item 5" /></a>
 					</div>
 					<h4>서울 경복궁</h4>
 					<p>서울 종로구 사직로 161</p>
@@ -71,9 +71,9 @@
 				</div>
 				<div class="col one_fourth gallery_box">
 					<div class="img_frame img_frame_14 img_nom">
-						<span></span> <a href="images/portfolio/06-l.jpg"
+						<span></span> <a href="../semiproject/images/portfolio/06-l.jpg"
 							rel="lightbox[new_gallery]"><img
-							src="images/portfolio/06.jpg" alt="Gallery Item 6" /></a>
+							src="../semiproject/images/portfolio/06.jpg" alt="Gallery Item 6" /></a>
 					</div>
 					<h4>가평 남이섬</h4>
 					<p>남산면 길 1 남이섬</p>
@@ -81,9 +81,9 @@
 				</div>
 				<div class="col one_fourth gallery_box">
 					<div class="img_frame img_frame_14 img_nom">
-						<span></span> <a href="images/portfolio/07-l.jpg"
+						<span></span> <a href="../semiproject/images/portfolio/07-l.jpg"
 							rel="lightbox[new_gallery]"><img
-							src="images/portfolio/07.jpg" alt="Gallery Item 7" /></a>
+							src="../semiproject/images/portfolio/07.jpg" alt="Gallery Item 7" /></a>
 					</div>
 					<h4>가평 쁘디프랑스</h4>
 					<p>경기 가평군 청평면 호반로 1063</p>
@@ -91,9 +91,9 @@
 				</div>
 				<div class="col one_fourth gallery_box no_margin_right">
 					<div class="img_frame img_frame_14 img_nom">
-						<span></span> <a href="images/portfolio/08-l.jpg"
+						<span></span> <a href="../semiproject/images/portfolio/08-l.jpg"
 							rel="lightbox[new_gallery]"><img
-							src="images/portfolio/08.jpg" alt="Gallery Item 8" /></a>
+							src="../semiproject/images/portfolio/08.jpg" alt="Gallery Item 8" /></a>
 					</div>
 					<h4>서울 남산타워</h4>
 					<p>서울 용산구 남산공원길 105</p>
@@ -103,10 +103,10 @@
 			<div class="clear"></div>
 			<div class="pagging">
 				<ul>
-					<li><a href="gallery.jsp">Previous</a></li>
-					<li><a href="gallery.jsp">1</a></li>
-					<li><a href="gallery2.jsp">2</a></li>
-					<li><a href="gallery2.jsp">Next</a></li>
+					<li><a href="../semiproject/gallery.jsp">Previous</a></li>
+					<li><a href="../semiproject/gallery.jsp">1</a></li>
+					<li><a href="../semiproject/gallery2.jsp">2</a></li>
+					<li><a href="../semiproject/gallery2.jsp">Next</a></li>
 				</ul>
 			</div>
 

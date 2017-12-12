@@ -66,7 +66,7 @@ public class UserAction {
 
 	private void signUp(HttpServletRequest req, HttpServletResponse resp) {
 		String user_id = req.getParameter("id");
-		String user_pw = req.getParameter("password");
+		String user_pw = req.getParameter("pw");
 		String user_name = req.getParameter("name");
 		String user_gender = req.getParameter("gender");
 		String user_address = req.getParameter("city") + req.getParameter("district");

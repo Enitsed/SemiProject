@@ -61,13 +61,14 @@
 		<div class="col one_fourth no_margin_right">
 			<h4>Twitter</h4>
 			<ul class="no_bullet">
-				<li><a href="#">@templatemo</a> at scelerisque urna in tellus
-					varius ultricies.</li>
-				<li>Suspendisse enean <a href="#">#FREE</a> tincidunt massa in
-					tellus varius ultricies.
+				<li>
+					<a href="#">@templatemo</a> at scelerisque urna in tellus varius ultricies.
+				<li>
+					Suspendisse enean <a href="#">#FREE</a> tincidunt massa in tellus varius ultricies.
 				</li>
-				<li>Aenean tincidunt massa in tellus varius ultricies. <a
-					href="#">http://bit.ly/13IwZO</a></li>
+				<li>
+					Aenean tincidunt massa in tellus varius ultricies. <a href="#">http://bit.ly/13IwZO</a>
+				</li>
 			</ul>
 		</div>
 

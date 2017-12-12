@@ -53,9 +53,9 @@
 				$('.reply_frm').attr('action', 'reply_delete');
 				$('.reply_frm').submit();
 			});
-
 	    });
 	</script>
+
 	<c:choose>
 		<c:when test="${isMember eq false || memberInfo.user_id == null}">
 			<div id="templatemo_main">
