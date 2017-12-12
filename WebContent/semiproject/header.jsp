@@ -223,11 +223,9 @@ $(window).on('load', function() {
 					<ul>
 						<li><a href="#">파주</a></li>
 						<li><a href="#">고양</a></li>
-
 					</ul></li>
 			</ul></li>
 		<li><a href="../main/gallery" <c:if test="${board_loc == 'gallery' }">class="selected"</c:if>>갤러리</a></li>
-		<li><a href="../main/blog" <c:if test="${board_loc == 'blog' }">class="selected"</c:if>>블로그</a></li>
 		<li><a href="../main/contact" <c:if test="${board_loc == 'contact' }">class="selected"</c:if>>문의 사항</a></li>
 		<li><a href="../main/board" <c:if test="${board_loc == 'board' }">class="selected"</c:if>>게시판</a></li>
 

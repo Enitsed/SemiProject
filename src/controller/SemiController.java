@@ -47,9 +47,6 @@ public class SemiController extends HttpServlet {
 		} else if (action.equals("/gallery")) {
 			req.setAttribute("board_loc", "gallery");
 			path = "/semiproject/gallery.jsp";
-		} else if (action.equals("/blog")) {
-			req.setAttribute("board_loc", "blog");
-			path = "/semiproject/blog.jsp";
 		} else if (action.equals("/contact")) {
 			req.setAttribute("board_loc", "contact");
 			path = "/semiproject/contact.jsp";
