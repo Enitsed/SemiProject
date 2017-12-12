@@ -34,15 +34,32 @@ public class SemiController extends HttpServlet {
 		UserAction userAction = new UserAction(); // 유저 관련 명령어 처리 객체
 		BoardAction boardAction = new BoardAction(); // 게시판 관련 명령어 처리 객체
 
-		if (action.equals("/*")) {
+		if (action.equals("/*") || action.equals("/index")) {
 			// 초기화면 수정필요
+			req.setAttribute("board_loc", "index");
 			path = "/semiproject/index.jsp";
+		} else if (action.equals("/seoul")) {
+			req.setAttribute("board_loc", "seoul");
+			path = "/semiproject/seoul.jsp";
+		} else if (action.equals("/gyeonggi")) {
+			req.setAttribute("board_loc", "gyeonggi");
+			path = "/semiproject/gyeonggi.jsp";
+		} else if (action.equals("/gallery")) {
+			req.setAttribute("board_loc", "gallery");
+			path = "/semiproject/gallery.jsp";
+		} else if (action.equals("/blog")) {
+			req.setAttribute("board_loc", "blog");
+			path = "/semiproject/blog.jsp";
+		} else if (action.equals("/contact")) {
+			req.setAttribute("board_loc", "contact");
+			path = "/semiproject/contact.jsp";
 		}
 		////////////////////////////////////////////////////
 		// 게시판 기능
 		else if (action.equals("/board")) {
 			// 게시판 목록 조회하기 (수정필요 : 페이지네이션, )
 			command = "list";
+			req.setAttribute("board_loc", "board");
 			req.setAttribute("command", command);
 			boardAction.execute(req, resp);
 			path = "/semiproject/board.jsp";

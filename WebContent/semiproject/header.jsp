@@ -76,7 +76,7 @@
 <script type="text/JavaScript" src="../semiproject/js/autoload.js"></script>
 
 <script type="text/javascript">
-    $(window).on('load', function() {
+$(window).on('load', function() {
 
 	/* Apply fancybox to multiple items */
 
@@ -88,7 +88,17 @@
 	    'overlayShow' : false,
 	    'hideOnContentClick' : true
 	});
-    });
+	
+	$(".ddsmoothmenu ul li a").on('mouseleave', function(e) {
+		if (this.href.substring(15)==="seoul") {
+			e.preventDefault();
+		} else if (this.href.substring(15)==="gyeonggi") {
+			
+		}
+	})
+	
+});
+    
 </script>
 
 <!--  t e m p l a t e m o  372  t i t a n i u m  -->
@@ -116,8 +126,8 @@
 <!-- END of templatemo_header -->
 <div id="templatemo_menu" class="ddsmoothmenu">
 	<ul>
-		<li><a href="../semiproject/index.jsp" class="selected">Home</a></li>
-		<li><a href="../semiproject/seoul.jsp">서울</a>
+		<li><a href="../main/index" <c:if test="${board_loc == 'index' }">class="selected"</c:if>>Home</a></li>
+		<li><a href="../main/seoul" <c:if test="${board_loc == 'seoul' }">class="selected"</c:if>>서울</a>
 			<ul>
 				<li><a href="#">종로·중구·용산</a>
 					<ul>
@@ -170,7 +180,8 @@
 					</ul></li>
 			</ul></li>
 
-		<li><a href="../semiproject/gyeonggi.jsp">경기</a>
+		<li>
+		<a href="../main/gyeonggi" <c:if test="${board_loc == 'gyeonggi' }">class='selected'</c:if>>경기</a>
 			<ul>
 				<li><a href="#">의정부·양주·포천</a>
 					<ul>
@@ -215,10 +226,10 @@
 
 					</ul></li>
 			</ul></li>
-		<li><a href="../semiproject/gallery.jsp">갤러리</a></li>
-		<li><a href="../semiproject/blog.jsp">블로그</a></li>
-		<li><a href="../semiproject/contact.jsp">문의 사항</a></li>
-		<li><a href="../main/board">게시판</a></li>
+		<li><a href="../main/gallery" <c:if test="${board_loc == 'gallery' }">class="selected"</c:if>>갤러리</a></li>
+		<li><a href="../main/blog" <c:if test="${board_loc == 'blog' }">class="selected"</c:if>>블로그</a></li>
+		<li><a href="../main/contact" <c:if test="${board_loc == 'contact' }">class="selected"</c:if>>문의 사항</a></li>
+		<li><a href="../main/board" <c:if test="${board_loc == 'board' }">class="selected"</c:if>>게시판</a></li>
 
 	</ul>
 	<br style="clear: left" />

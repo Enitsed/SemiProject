@@ -31,7 +31,13 @@
 
 		$('#write').on('click', function() {
 		    $('form').submit();
-		})
+		});
+
+		$('#list').on('click', function() {
+		    $('form').attr('action', '/semiproject/main/board');
+		    $('form').submit();
+		});
+
 	    });
 </script>
 </head>
@@ -63,7 +69,6 @@
 								<th>분류:</th>
 								<td><select id="category_menu" name="category_menu"
 									class="form-control">
-										<option value="">분류를선택하세요</option>
 										<option value="연애">연애</option>
 										<option value="스터디">스터디</option>
 										<option value="맛집">맛집</option>
@@ -86,7 +91,7 @@
 							</tr>
 							<tr>
 								<th>첨부파일:</th>
-								<td><input type="file" class="form-control" name="upload" /></td>
+								<td><input type="file" class="form-control" name="upload" accept=".jpg,.jpeg,.png,.gif,.bmp"/></td>
 							</tr>
 
 							<tr>

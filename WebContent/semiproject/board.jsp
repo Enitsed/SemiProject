@@ -10,24 +10,35 @@
 	<div id="templatemo_wrapper">
 		<jsp:include page="../semiproject/header.jsp" />
 
+<script type="text/javascript">
+$(document).ready(function() {
+	var selectedCategory = "${category }";
+
+	$.each($("a.list-group-item"), function(index) {
+	    var selCategory = $(this).attr('href').substr(15);
+	    if (selectedCategory===selCategory)
+			$(this).addClass("active");
+	})
+
+});
+</script>
 		<div id="templatemo_main">
 			<div class="navbar container">
 				<p class="">서울 강남구</p>
-				<h1>카테고리</h1>
 				<div class="list-group">
 					<c:url var="category" value="board">
-						<c:param name="category" value=""></c:param>
+						<c:param name="category"></c:param>
 					</c:url>
-					<a href="${category }" class="list-group-item">연애 
+					<a href="${category }연애" class="list-group-item">연애 
 						<span class="label label-default">New</span>
 					</a>
-					<a href="${category }" class="list-group-item">스터디
+					<a href="${category }스터디" class="list-group-item">스터디
 						<span class="label label-default">New</span>
 					</a>
-					<a href="${category }" class="list-group-item">맛집
+					<a href="${category }맛집" class="list-group-item">맛집
 						<span class="label label-default">New</span>
 					</a>
-					<a href="${category }" class="list-group-item">질문게시판
+					<a href="${category }질문게시판" class="list-group-item">질문게시판
 						<span class="label label-default">New</span>
 					</a>
 				</div>

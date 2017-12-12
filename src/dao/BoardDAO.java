@@ -51,12 +51,21 @@ public class BoardDAO {
 
 	//////////////////////// 목록
 
-	public List<BoardDTO> listMethod() {
+	public List<BoardDTO> listMethod(String category) {
 		List<BoardDTO> aList = new ArrayList<BoardDTO>();
+		String sql = null;
 		try {
 			conn = init();
-			String sql = "select * from board order by board_num desc";
-			pstmt = conn.prepareStatement(sql);
+			if(category == null || category.equals("")) {
+				// 선택한 카테고리가 없을때
+				sql = "select * from board order by board_num desc";
+				pstmt = conn.prepareStatement(sql);
+			} else {
+				// 선택한 카테고리가 있으면 해당 카테고리 글을 보여준다.
+				sql = "select * from board where board_category=? order by board_num desc";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, category);
+			}
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BoardDTO dto = new BoardDTO();

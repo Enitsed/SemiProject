@@ -37,6 +37,7 @@ create sequence board_seq start with 1 increment by 1 nocache nocycle;
 update board set board_subject='asdasd', board_content='asdasdasd', board_loc_city_code=1, board_loc_code=2, board_category='연애' where board_num=15
 drop sequence board_seq
 drop table board
+select * from board where board_category='연애' order by board_num desc;
 
 create table board_re(
    user_id varchar2(20) CONSTRAINTS board_re_user_id_fk REFERENCES users(user_id) on delete cascade ,

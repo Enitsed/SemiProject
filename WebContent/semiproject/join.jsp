@@ -5,44 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="../semiproject/templatemo_style.css" rel="stylesheet"
 	type="text/css" />
 
-<link rel="stylesheet" href="../semiproject/css/orman.css"
-	type="text/css" media="screen" />
-<link rel="stylesheet" href="../semiproject/css/nivo-slider.css"
-	type="text/css" media="screen" />
-
-<link rel="stylesheet" type="text/css"
-	href="../semiproject/css/ddsmoothmenu.css" />
-
-<script type="text/javascript" src="../semiproject/js/jquery.min.js"></script>
-<script type="text/javascript" src="../semiproject/js/ddsmoothmenu.js">
-    /***********************************************
-     * Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
-     * This notice MUST stay intact for legal use
-     * Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
-     ***********************************************/
-</script>
-
-<script language="javascript" type="text/javascript">
-    ddsmoothmenu.init({
-	mainmenuid : "templatemo_menu", //menu DIV id
-	orientation : 'h', //Horizontal or vertical menu: Set to "h" or "v"
-	classname : 'ddsmoothmenu', //class added to menu's outer DIV
-	//customtheme: ["#1c5a80", "#18374a"],
-	contentsource : "markup" //"markup" or ["container_id", "path_to_menu_file"]
-    })
-
+<script type="text/javascript">
     function clearText(field) {
 	if (field.defaultValue == field.value)
 	    field.value = '';
@@ -53,7 +19,6 @@
 
 <link rel="stylesheet" href="../semiproject/css/slimbox2.css"
 	type="text/css" media="screen" />
-<script type="text/JavaScript" src="../semiproject/js/slimbox2.js"></script>
 <!--  t e m p l a t e m o  372  t i t a n i u m  -->
 <style type="text/css">
 select {
@@ -72,6 +37,11 @@ select {
 	float: right;
 }
 </style>
+</head>
+<body>
+	<div id="templatemo_wrapper">
+		<jsp:include page="../semiproject/header.jsp"></jsp:include>
+
 <script type="text/javascript">
     $(document).ready(function() {
 	$('#cancelBtn').on('click', function() {
@@ -81,10 +51,6 @@ select {
 	});
     });
 </script>
-</head>
-<body>
-	<div id="templatemo_wrapper">
-		<jsp:include page="../semiproject/header.jsp"></jsp:include>
 
 		<div id="templatemo_main">
 			<form name="memberInfo" method="post" action="/semiproject/main/signup">

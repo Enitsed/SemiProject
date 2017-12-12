@@ -185,8 +185,11 @@ public class BoardAction {
 		}
 		bdto.setBoard_subject(multi.getParameter("subject"));
 		bdto.setBoard_content(multi.getParameter("content"));
-		bdto.setBoard_loc_city_code(Integer.parseInt(multi.getParameter("city_menu")));
-		bdto.setBoard_loc_code(Integer.parseInt(multi.getParameter("loc_menu")));
+		if (!multi.getParameter("city_menu").equals(""))
+			bdto.setBoard_loc_city_code(Integer.parseInt(multi.getParameter("city_menu")));
+		if (!multi.getParameter("loc_menu").equals(""))
+			bdto.setBoard_loc_code(Integer.parseInt(multi.getParameter("loc_menu")));
+
 		bdto.setBoard_category(multi.getParameter("category_menu"));
 		bdto.setBoard_num(num);
 		dao.updateMethod(bdto);
@@ -219,8 +222,10 @@ public class BoardAction {
 		bdto.setBoard_subject(multi.getParameter("subject"));
 		bdto.setBoard_upload(multi.getFilesystemName("upload"));
 		bdto.setBoard_content(multi.getParameter("content"));
-		bdto.setBoard_loc_city_code(Integer.parseInt(multi.getParameter("city_menu")));
-		bdto.setBoard_loc_code(Integer.parseInt(multi.getParameter("loc_menu")));
+		if (!multi.getParameter("city_menu").equals(""))
+			bdto.setBoard_loc_city_code(Integer.parseInt(multi.getParameter("city_menu")));
+		if (!multi.getParameter("loc_menu").equals(""))
+			bdto.setBoard_loc_code(Integer.parseInt(multi.getParameter("loc_menu")));
 		bdto.setBoard_category(multi.getParameter("category_menu"));
 
 		BoardDAO dao = BoardDAO.getInstance();
@@ -258,7 +263,10 @@ public class BoardAction {
 
 	private void listAction(HttpServletRequest req, HttpServletResponse resp) {
 		BoardDAO dao = BoardDAO.getInstance();
-		List<BoardDTO> aList = dao.listMethod();
+		String category = req.getParameter("category");
+		req.setAttribute("category", category);
+		List<BoardDTO> aList = null;
+		aList = dao.listMethod(category);
 		req.setAttribute("aList", aList);
 		// 선택한 카테고리 파라미터 받고 해당 게시판만 보여주기 구현중
 
