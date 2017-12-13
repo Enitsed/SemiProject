@@ -51,20 +51,47 @@ public class BoardDAO {
 
 	//////////////////////// 목록
 
-	public List<BoardDTO> listMethod(String category) {
+	public int countRow(String category) {
+		int count = 0;
+		try {
+			conn = init();
+			if (category == null || category.equals("")) {
+				String sql = "select count(*) from board";
+				pstmt = conn.prepareStatement(sql);
+			} else {
+				String sql = "select count(*) from board where board_category=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, category);
+			}
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				count = rs.getInt("count(*)");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	public List<BoardDTO> listMethod(String category, int startRow, int endRow) {
 		List<BoardDTO> aList = new ArrayList<BoardDTO>();
 		String sql = null;
 		try {
 			conn = init();
-			if(category == null || category.equals("")) {
+			if (category == null || category.equals("")) {
 				// 선택한 카테고리가 없을때
-				sql = "select * from board order by board_num desc";
+				sql = "select b.* from (select rownum as rm, a.* from (select * from board order by board_date desc)a)b where b.rm between ? and ?";
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
 			} else {
 				// 선택한 카테고리가 있으면 해당 카테고리 글을 보여준다.
-				sql = "select * from board where board_category=? order by board_num desc";
+				sql = "select b.* from (select rownum as rm, a.* from (select * from board where board_category=? order by board_date desc)a)b where b.rm between ? and ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, category);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
 			}
 			rs = pstmt.executeQuery();
 			while (rs.next()) {

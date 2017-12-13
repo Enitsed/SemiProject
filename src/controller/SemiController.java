@@ -53,7 +53,7 @@ public class SemiController extends HttpServlet {
 		}
 		////////////////////////////////////////////////////
 		// 게시판 기능
-		else if (action.equals("/board")) {
+		else if (action.equals("/board") || action.equals("/pageNum=*")) {
 			// 게시판 목록 조회하기 (수정필요 : 페이지네이션, )
 			command = "list";
 			req.setAttribute("board_loc", "board");

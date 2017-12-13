@@ -63,6 +63,7 @@
 			<ul class="no_bullet">
 				<li>
 					<a href="#">@templatemo</a> at scelerisque urna in tellus varius ultricies.
+				</li>
 				<li>
 					Suspendisse enean <a href="#">#FREE</a> tincidunt massa in tellus varius ultricies.
 				</li>

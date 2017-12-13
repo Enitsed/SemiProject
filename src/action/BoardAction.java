@@ -257,20 +257,45 @@ public class BoardAction {
 
 		ReplyDAO rdao = ReplyDAO.getInstance();
 		List<ReplyDTO> rList = rdao.listMethod(num);
-		req.setAttribute("rList", rList);
 
+		req.setAttribute("rList", rList);
 	} // end viewAction();
 
 	private void listAction(HttpServletRequest req, HttpServletResponse resp) {
 		BoardDAO dao = BoardDAO.getInstance();
-		String category = req.getParameter("category");
-		req.setAttribute("category", category);
+		String category = req.getParameter("category"); // 보여줄 카테고리
 		List<BoardDTO> aList = null;
-		aList = dao.listMethod(category);
+		int boardCount = dao.countRow(category); // 해당 카테고리 글 수
+		int currentPage = 1; // 현재 페이지
+		if (req.getParameter("pageNum") != null) {
+			currentPage = Integer.parseInt(req.getParameter("pageNum")); // 현재 페이지
+			req.setAttribute("currentPage", currentPage);
+		}
+		int startPage = 1; // 시작 페이지
+		int pageCount = pageCount(boardCount); // 페이지 개수
+
+		int startRow = (currentPage - 1) * 9 + 1;
+		int endRow = currentPage * 9;
+
+		aList = dao.listMethod(category, startRow, endRow);
+		req.setAttribute("endPage", pageCount);
+		req.setAttribute("startPage", startPage);
+		req.setAttribute("category", category);
+		req.setAttribute("pageCount", pageCount);
 		req.setAttribute("aList", aList);
 		// 선택한 카테고리 파라미터 받고 해당 게시판만 보여주기 구현중
 
 	} // end listAction();
+
+	private int pageCount(int boardCount) {
+		int showRows = 9; // 보여줄 게시글 수
+		int pageCnt = (boardCount % showRows) > 0 ? (boardCount / showRows) + 1 : 0;
+		// boardCount(게시글 수)를 showRows(보여줄 게시글 수)로 나눈 수가 0보다 크면 1페이지를 더 추가한다.
+		if (pageCnt < 1) {
+			pageCnt = 1;
+		}
+		return pageCnt;
+	}
 
 	///////////////////////////////////// 댓글
 
