@@ -264,8 +264,10 @@ public class BoardAction {
 	private void listAction(HttpServletRequest req, HttpServletResponse resp) {
 		BoardDAO dao = BoardDAO.getInstance();
 		String category = req.getParameter("category"); // 보여줄 카테고리
+		String searchValue = req.getParameter("searchValue");
+		String searchKey = req.getParameter("searchKey");
 		List<BoardDTO> aList = null;
-		int boardCount = dao.countRow(category); // 해당 카테고리 글 수
+		int boardCount = dao.countRow(category, searchKey, searchValue); // 해당 카테고리 글 수
 		int currentPage = 1; // 현재 페이지
 		if (req.getParameter("pageNum") != null) {
 			currentPage = Integer.parseInt(req.getParameter("pageNum")); // 현재 페이지
@@ -277,7 +279,8 @@ public class BoardAction {
 		int startRow = (currentPage - 1) * 9 + 1;
 		int endRow = currentPage * 9;
 
-		aList = dao.listMethod(category, startRow, endRow);
+		System.out.println(searchValue + " : " + searchKey);
+		aList = dao.listMethod(category, startRow, endRow, searchValue, searchKey);
 		req.setAttribute("endPage", pageCount);
 		req.setAttribute("startPage", startPage);
 		req.setAttribute("category", category);

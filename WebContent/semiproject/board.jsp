@@ -86,7 +86,7 @@ $(document).ready(function() {
 						</li>
 						<c:forEach begin="${startPage }" end="${pageCount }" var="pageNum" >
 							<li>
-								<a href="?pageNum=${pageNum }">${pageNum}</a>
+								<a <c:if test="${pageNum ne param.pageNum}">href="?pageNum=${pageNum }"</c:if>>${pageNum}</a>
 							</li>
 						</c:forEach>
 						<li>
@@ -98,13 +98,15 @@ $(document).ready(function() {
 				</nav>
 				
 				<div class="form-group">
-					<form class="form-group">
+					<form class="form-group" action="../main/board">
 						<select name="searchKey" class="form-control">
 							<option value="all" selected="selected">검색어를 입력</option>
-							<option value="subject">제목</option>
-							<option value="content">내용</option>
-							<option value="writer">글쓴이</option>
-						</select> <input type="text" class="form-control" placeholder="검색할 글 입력" />
+							<option value="board_subject">제목</option>
+							<option value="board_content">내용</option>
+							<option value="user_id">글쓴이</option>
+						</select>
+						<input type="text" class="form-control" placeholder="검색할 글 입력" name="searchValue" />
+						<input type="hidden" name="category" value="${requestScope.category }" />
 						<button type="submit" class="btn btn-default" id="searchBtn">검색</button>
 					</form>
 					<c:if test="${isMember == true }">

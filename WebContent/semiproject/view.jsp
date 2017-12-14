@@ -53,9 +53,21 @@
 				$('.reply_frm').attr('action', 'reply_delete');
 				$('.reply_frm').submit();
 			});
+			
+			var reply_num_val = '<c:forEach items="${rList }" var="rep_dto"><c:out value=",${rep_dto.reply_num}"></c:out></c:forEach>';
+			var reply_num_arr = reply_num_val.toString().split(",");
+			reply_num_arr = reply_num_arr.filter(function(elem){
+			    return elem != ""; 
+			});
+			$.each(reply_num_arr, function(i, elt) {
+				alert(i+":"+elt);
+			});
+			
+			$('.reply_update').on('click', function(){
+			    $('.reply_write_content').val('');
+			});
 	    });
 	</script>
-
 	<c:choose>
 		<c:when test="${isMember eq false || memberInfo.user_id == null}">
 			<div id="templatemo_main">
@@ -169,7 +181,7 @@
 				</td>
 				<!-- 본문내용 -->
 				<td width="550">
-					<div class="text_wrapper">
+					<div class="text_wrapper reply_content">
 						${rList.reply_content}
 					</div>
 				</td>
@@ -208,7 +220,7 @@
 				<!-- 본문 작성-->
 				<td width="550">
 				   <div>
-				      <textarea name="comment_content" rows="4" cols="70" ></textarea>
+				      <textarea name="comment_content" rows="4" cols="70" class="reply_write_content"></textarea>
 				   </div>
 				</td>
 				<!-- 댓글 등록 버튼 -->

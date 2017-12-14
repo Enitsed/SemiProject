@@ -38,10 +38,10 @@ update board set board_subject='asdasd', board_content='asdasdasd', board_loc_ci
 drop sequence board_seq
 drop table board
 select b.* from (select rownum as rm, a.* from 
-			(select * from board where board_category='연애' order by board_date desc)
+			(select * from board where lower(board_content) like lower('%d%') order by board_date desc)
 			a)b where b.rm between 1 and 9;
 
-
+select count(*) from board where lower(user_id) like lower('%lh%')
 
 
 create table board_re(
