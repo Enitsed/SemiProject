@@ -29,16 +29,16 @@
 <body>
 
 	<div id="templatemo_wrapper">
-		<jsp:include page="../semiproject/header.jsp" >
+		<jsp:include page="../semiproject/header.jsp">
 			<jsp:param value="${isMember }" name="isMember" />
 			<jsp:param value="${memberInfo }" name="dto" />
 		</jsp:include>
 		<!-- end of templatemo_menu -->
 		<script type="text/javascript">
 	    $(document).on("load", function() {
-			$('#signUp').on('click', function() {
-			    location.href = '/semiproject/board/join';
-			});
+		$('#signUp').on('click', function() {
+		    location.href = '/semiproject/board/join';
+		});
 	    });
 	</script>
 		<div id="templatemo_main" align="center">
@@ -50,13 +50,13 @@
 							alt="로그인로고" /></a>
 					</h1>
 					<p class="user_id" align="center">
-						<label for="id"> </label> <input type="text" name="id" id="id"
-							style="width: 400px; height: 50px; letter-spacing: 0px"
+						<label for="id"> </label> <input type="text" name="user_id"
+							id="id" style="width: 400px; height: 50px; letter-spacing: 0px"
 							placeholder="아이디" />
 					</p>
 					<p class="user_pw" align="center">
 						<label for="user_pw"> </label> <input type="password"
-							name="password" id="password"
+							name="user_pw" id="password"
 							style="width: 400px; height: 50px; letter-spacing: 0px"
 							placeholder="비밀번호" />
 					</p>
@@ -71,8 +71,8 @@
 					<hr>
 					<br>
 					<p class="join_btn_wrap">
-						<span> <a href="#" class="sch_id_btn">아이디/비밀번호 찾기</a>
-							&nbsp;&nbsp;/&nbsp;&nbsp;
+						<span> <a href="../semiproject/findIdPw.jsp"
+							class="sch_id_btn">아이디/비밀번호 찾기</a> &nbsp;&nbsp;/&nbsp;&nbsp;
 						</span> <a href="/semiproject/main/join" id="signUp">회원가입</a>
 					</p>
 				</fieldset>

@@ -303,7 +303,7 @@ select {
 					<div class="form-row">
 						<div class="form-group col-md-6" id="idd">
 							<label for="id">아이디</label> <input type="text"
-								class="form-control" id="id" placeholder="ID" name="id"
+								class="form-control" id="id" placeholder="ID" name="user_id"
 								pattern="[a-z|A-Z|0-9]{3,14}" title="특수문자는 입력하실수 없습니다."
 								style="text-align: center; IME-MODE: disabled;" maxlength=15 />
 						</div>
@@ -314,7 +314,7 @@ select {
 
 						<div class="form-group col-md-6" id="pwd">
 							<label for="pwd">비밀번호</label> <input type="password"
-								class="form-control" id="pw" placeholder="Password" name="pw"
+								class="form-control" id="pw" placeholder="Password" name="user_pw"
 								style="text-align: center;" maxlength=18
 								onblur="javascript:ChkPwd();" />
 						</div>

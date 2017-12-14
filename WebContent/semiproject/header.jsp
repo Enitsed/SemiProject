@@ -109,8 +109,9 @@ $(window).on('load', function() {
 	<div id="templatemo_search">
 		<c:choose>
 			<c:when test="${isMember==true && memberInfo ne null }">
-				<span style="color: red;"> 어서오세요. ${memberInfo.user_id } 님</span>
-				<button class="btn btn-default" type="submit" id="logout">로그아웃</button>
+				<span style="color :white">${memberInfo.user_name } 님 환영합니다.</span>
+				<a href="../semiproject/viewinfo.jsp" style="color :red;">마이페이지</a>
+				<img src="../semiproject/images/util_menu_logout.gif" id="logout" alt="로그아웃"/>
 			</c:when>
 			<c:otherwise>
 				<div class="login_wrap">

@@ -130,12 +130,40 @@ public class SemiController extends HttpServlet {
 			command = "login_check";
 			req.setAttribute("command", command);
 			userAction.execute(req, resp);
-			path = "/semiproject/index.jsp";
 		} else if (action.equals("/logout")) {
 			// 로그아웃
 			command = "logout";
 			req.setAttribute("command", command);
 			userAction.execute(req, resp);
+		} else if (action.equals("/mypage")) {
+			/////////////////// 로그인 후 마이페이지 창 이동/////////////////
+			command = "mypage";
+			req.setAttribute("command", command);
+			userAction.execute(req, resp);
+			path = "/semiproject/viewinfo.jsp";
+		} else if (action.equals("/mypage_update")) {
+			// 회원정보 수정
+			command = "mypage_update";
+			req.setAttribute("command", command);
+			userAction.execute(req, resp);
+		} else if (action.equals("/delete")) {
+			// 회원탈퇴 폼
+			path = "/semiproject/deleteForm.jsp";
+		} else if (action.equals("/delete_final")) {
+			// 회원탈퇴
+			path = "/semiproject/deleteFinal.jsp";
+		} else if (action.equals("/findid")) {
+			// 아이디 찾기
+			command = "findid";
+			req.setAttribute("command", command);
+			userAction.execute(req, resp);
+			path = "/semiproject/find.jsp";
+		} else if (action.equals("/findpw")) {
+			// 비밀번호 찾기
+			command = "findpw";
+			req.setAttribute("command", command);
+			userAction.execute(req, resp);
+			path = "/semiproject/find.jsp";
 		}
 
 		if (path != "") {

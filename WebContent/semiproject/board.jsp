@@ -42,7 +42,6 @@ $(document).ready(function() {
 						<span class="label label-default">New</span>
 					</a>
 				</div>
-
 			</div>
 
 			<div class="article">

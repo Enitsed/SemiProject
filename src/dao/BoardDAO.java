@@ -86,7 +86,6 @@ public class BoardDAO {
 				count = rs.getInt("count(*)");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return count;
