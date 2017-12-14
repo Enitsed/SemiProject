@@ -80,17 +80,17 @@ $(document).ready(function() {
 				<nav aria-label="Page navigation">
 					<ul class="pagination">
 						<li>
-							<a href="?pageNum=${startPage }" aria-label="Previous">
+							<a href="?pageNum=${startPage }&category=${requestScope.category }&searchKey=${requestScope.searchKey }&searchValue=${requestScope.searchValue }" aria-label="Previous">
 								<span aria-hidden="true">&laquo;</span>
 							</a>
 						</li>
-						<c:forEach begin="${startPage }" end="${pageCount }" var="pageNum" >
+						<c:forEach begin="${startPage }" end="${endPage }" var="pageNum" >
 							<li>
-								<a <c:if test="${pageNum ne param.pageNum}">href="?pageNum=${pageNum }"</c:if>>${pageNum}</a>
+								<a <c:if test="${pageNum ne param.pageNum}">href="?pageNum=${pageNum }&category=${requestScope.category }&searchKey=${requestScope.searchKey }&searchValue=${requestScope.searchValue }"</c:if>>${pageNum}</a>
 							</li>
 						</c:forEach>
 						<li>
-							<a href="?pageNum=${endPage }" aria-label="Next">
+							<a href="?pageNum=${endPage }&category=${requestScope.category }&searchKey=${requestScope.searchKey }&searchValue=${requestScope.searchValue }" aria-label="Next">
 								<span aria-hidden="true">&raquo;</span>
 							</a>
 						</li>

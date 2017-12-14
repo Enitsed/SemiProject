@@ -273,21 +273,20 @@ public class BoardAction {
 			currentPage = Integer.parseInt(req.getParameter("pageNum")); // 현재 페이지
 			req.setAttribute("currentPage", currentPage);
 		}
-		int startPage = 1; // 시작 페이지
+		final int startPage = 1; // 시작 페이지
 		int pageCount = pageCount(boardCount); // 페이지 개수
-
-		int startRow = (currentPage - 1) * 9 + 1;
-		int endRow = currentPage * 9;
+		final int showRows = 9; // 보여줄 글 개수
+		int startRow = (currentPage - 1) * showRows + 1; // 어디서 부터 보여줄 것인지
+		int endRow = currentPage * showRows; // 어디까지 보여줄 것인지
 
 		System.out.println(searchValue + " : " + searchKey);
 		aList = dao.listMethod(category, startRow, endRow, searchValue, searchKey);
-		req.setAttribute("endPage", pageCount);
-		req.setAttribute("startPage", startPage);
-		req.setAttribute("category", category);
-		req.setAttribute("pageCount", pageCount);
-		req.setAttribute("aList", aList);
-		// 선택한 카테고리 파라미터 받고 해당 게시판만 보여주기 구현중
-
+		req.setAttribute("searchKey", searchKey); // 검색 키
+		req.setAttribute("searchValue", searchValue); // 검색 값
+		req.setAttribute("endPage", pageCount); // 마지막 페이지
+		req.setAttribute("startPage", startPage); // 첫 페이지
+		req.setAttribute("category", category); // 카테고리
+		req.setAttribute("aList", aList); // 보여줄 글 목록
 	} // end listAction();
 
 	private int pageCount(int boardCount) {
