@@ -104,7 +104,7 @@ $(window).on('load', function() {
 <!--  t e m p l a t e m o  372  t i t a n i u m  -->
 <div id="templatemo_header">
 	<div id="site_title">
-		<a href="../semiproject/index.jsp">소통</a>
+		<a href="../main/index">소통</a>
 	</div>
 	<div id="templatemo_search">
 		<c:choose>

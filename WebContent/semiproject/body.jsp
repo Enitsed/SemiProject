@@ -38,12 +38,11 @@
 </div>
 <div class="half right">
    <ul class="list_bullet">
-    <c:forEach items="${aList}" var="dto">
-      <c:if test="${dto.board_loc_code eq '서울'}" >
-      		<p>pppp</p>
+    <c:forEach items="${aList }" var="dto">
+      <c:if test="${dto.board_loc_code eq '서울특별시' }" >
 	    	<li class="flow">
-	          <c:url var="d" value="http://localhost:8090/semiproject/main/seoul">
-	             <c:param name="loc_code" value="${dto.board_loc_code }"></c:param>
+	          <c:url var="d" value="view">
+	             <c:param name="num" value="${dto.board_num }"></c:param>
 	          </c:url>
 	          <span>${dto.board_num }</span>
 	          <a href="${d}"target="_blank"><span>[${dto.board_category}]</span>${dto.board_subject }</a>
@@ -52,7 +51,7 @@
       </c:if>
    </c:forEach>
    </ul>
-   <a href="http://localhost:8090/semiproject/main/seoul" class="more">More</a>
+   <a href="../main/seoul" class="more">More</a>
 </div>
 
 <div class="clear h40"></div>
@@ -67,23 +66,20 @@
       <em> 연애 </em>
    </p>
    <ul class="list_bullet">
-      <li class="flow"><a href="http://dev7studios.com" target="_blank">Etiam
-            sodales, diam ac mollis pharetra</a></li>
-      <li class="flow"><a href="http://dev7studios.com" target="_blank">Etiam
-            sodales, diam ac mollis pharetra</a></li>
-
+     <c:forEach items="${aList }" var="dto">
+      <c:if test="${dto.board_loc_code eq '경기도' }" >
+	    	<li class="flow">
+	          <c:url var="d" value="view">
+	             <c:param name="num" value="${dto.board_num }"></c:param>
+	          </c:url>
+	          <span>${dto.board_num }</span>
+	          <a href="${d}"target="_blank"><span>[${dto.board_category}]</span>${dto.board_subject }</a>
+	          <span>${dto.user_id}</span>
+	    	</li>
+      </c:if>
+   </c:forEach>
    </ul>
-   <a href="#" class="more">More</a>
-   <p>
-      <em> 자유게시판 </em>
-   </p>
-   <ul class="list_bullet">
-      <li class="flow"><a href="http://dev7studios.com" target="_blank">Etiam
-            sodales, diam ac mollis pharetra</a></li>
-      <li class="flow"><a href="http://dev7studios.com" target="_blank">Etiam
-            sodales, diam ac mollis pharetra</a></li>
-   </ul>
-   <a href="#" class="more">More</a>
+   <a href="../main/gyeonggi" class="more">More</a>
 </div>
 
 <div class="clear"></div>

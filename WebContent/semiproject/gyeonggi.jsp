@@ -5,17 +5,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>경기도</title>
+<title>소통 : 서울</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+<style type="text/css">
+.sidebar_box {
+	min-height:230px;
+}
+</style>
 </head>
 <body>
 	<div id="templatemo_wrapper">
 		<jsp:include page="../semiproject/header.jsp" />
 		<!-- end of templatemo_menu -->
+
 		<div id="templatemo_main">
 			<div id="sidebar" class="half left" align="center"
 				style="width: 45%; height: 45%">
+
 				<!-- --------------------------------------------- -->
 				<div class="sidebar_box">
 					<h3>
@@ -33,7 +40,10 @@
 							<c:forEach items="${aList }" var="dto">
 								<c:if
 									test="${dto.board_loc_code eq '경기도' and (dto.board_loc_city_code eq '의정부시' or dto.board_loc_city_code eq '양주시' or dto.board_loc_city_code eq '포천시') }">
-									<li class="flow"><a href="#" target="_blank">[${dto.board_loc_city_code}]
+									<c:url var="boardview" value="view">
+										<c:param name="num" value="${dto.board_num }"></c:param>
+									</c:url>
+									<li class="flow"><a href="${boardview }" target="_blank">[${dto.board_loc_city_code}]
 											${dto.board_subject } ${dto.board_readcount }</a></li>
 								</c:if>
 							</c:forEach>
@@ -112,7 +122,12 @@
 						</ul>
 					</div>
 				</div>
-				<!-- --------------------------------------------- -->
+				<!-- -----------------------------------------끊음---- -->
+			</div>
+			<!--  dddddddddd -->
+
+			<div id="sidebar" class="half right" align="center"
+				style="width: 45%; height: 45%">
 				<div class="sidebar_box">
 					<h3>
 						<font size="4" color="#000000">안양·수원·의왕·안산·군포</font>
@@ -190,6 +205,7 @@
 		</div>
 		<!-- END of templatemo_main -->
 	</div>
+	<!-- END of templatemo_main -->
 	<jsp:include page="../semiproject/footer.jsp" />
 	<!-- END of templatemo_footer_wrapper -->
 </body>
