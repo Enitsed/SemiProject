@@ -40,9 +40,6 @@ public class SemiController extends HttpServlet {
 			path = "/semiproject/index.jsp";
 		} else if (action.equals("/seoul")) {
 			req.setAttribute("board_loc", "seoul");
-			command = "location_boardList";
-			req.setAttribute("command", command);
-			boardAction.execute(req, resp);
 			path = "/semiproject/seoul.jsp";
 		} else if (action.equals("/gyeonggi")) {
 			req.setAttribute("board_loc", "gyeonggi");
@@ -110,6 +107,16 @@ public class SemiController extends HttpServlet {
 			command = "reply_delete";
 			req.setAttribute("command", command);
 			boardAction.execute(req, resp);
+		} else if (action.equals("/reply_update")) {
+			command = "reply_update";
+			req.setAttribute("command", command);
+			boardAction.execute(req, resp);
+			path = "/semiproject/replyupdateview.jsp";
+		} else if (action.equals("/reply_modify")) {
+			//댓글수정
+			command = "reply_modify";
+			req.setAttribute("command", command);
+			boardAction.execute(req, resp);
 		}
 
 		//////////////////////////////////////////////////
@@ -125,7 +132,14 @@ public class SemiController extends HttpServlet {
 			userAction.execute(req, resp);
 			System.out.println("회원가입 완료");
 			path = "/semiproject/index.jsp";
-		} else if (action.equals("/login")) {
+		} else if(action.equals("/confirmId")) {
+			//아이디 중복 체크
+			command = "confirmId";
+			req.setAttribute("command", command);
+			userAction.execute(req, resp);
+			System.out.println("회원가입 완료");
+			path = "/semiproject/confirmId.jsp";
+		}else if (action.equals("/login")) {
 			// 로그인 창으로 이동
 			path = "/semiproject/login.jsp";
 		} else if (action.equals("/login_check")) {

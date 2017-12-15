@@ -116,5 +116,52 @@ public class ReplyDAO {
 			}
 		}
 	} // end replyDeleteMethod()
+	
+	public ReplyDTO getReply(int num) {
+		ReplyDTO dto = null;
+		try {
+			conn = init();
+			String sql = "select * from reply where reply_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				dto = new ReplyDTO();
+				dto.setUser_id(rs.getString("user_id"));
+				dto.setBoard_num(rs.getInt("board_num"));
+				dto.setReply_num(rs.getInt("reply_num"));
+				dto.setReply_content(rs.getString("reply_content"));
+				dto.setReply_date(rs.getDate("reply_date"));
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				exit();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+	}//end getReply///////////////////////////////////////////////////////
+	
+	public void updateMethod(String reply_content, int reply_num) {
+		try {
+			conn = init();
+			String sql = "update reply set reply_content=? where reply_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, reply_content);
+			pstmt.setInt(2, reply_num);
+			pstmt.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				exit();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	} // end updateMethod()
 
 }// end class

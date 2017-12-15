@@ -115,7 +115,7 @@ $(window).on('load', function() {
 			</c:when>
 			<c:otherwise>
 				<div class="login_wrap">
-					<a href="../main/login" onClick="login();"> <img
+					<a href="../main/login"> <img
 						src="../semiproject/images/util_menu_1.gif" alt="로그인" />
 					</a> &nbsp; <a href="../main/join" id="inputform"><img
 						src="../semiproject/images/util_menu_2.gif" alt="회원가입" /></a>

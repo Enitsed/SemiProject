@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -90,20 +90,6 @@ select {
 	});
 	
  }); 
-    
-	/* function Check_pw(){
-		if(document.findPw.findPw_id.value==""){
-			alert("비밀번호 찾기 : 아이디를 입력해주세요.");
-			document.findPw.findPw_id.focus();
-			return false;
-		}
-		if (document.findPw.findPW_name.value == "") {
-			alert("비밀번호 찾기 : 이름을 입력해주세요.");
-			document.findPw.findPW_name.focus();
-			return false;
-		}
-		document.findId.submit(); 
-	}; */
 </script>
 </head>
 <body>

@@ -1,4 +1,4 @@
-package action;
+﻿package action;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,9 +31,9 @@ public class UserAction {
 			findId(req, resp);
 		} else if (command == "findpw") {
 			findPw(req, resp);
-		} /*
-			 * else if (command == "delete") { delete(req, resp); }
-			 */
+		} else if(command == "confirmId") {
+			confirmId(req, resp);
+		}
 
 	} // end execute();
 
@@ -53,16 +53,20 @@ public class UserAction {
 		// 디비에서 멤버 조회 후 로그인 세션
 		if (dao.memChk(checker)) {
 			System.out.println("로그인 성공");
-			session.setAttribute("memberInfo", dao.getMemInfo(checker));
+			session.setAttribute("memberInfo", dao.memberinfo(user_id));
+			session.setAttribute("logOk", user_id);
 			session.setMaxInactiveInterval(30 * 60); // 30분
 			session.setAttribute("isMember", true);
-			resp.sendRedirect("/semiproject/main/index");
+			session.setAttribute("chk", 1);
+			session.setAttribute("user_id", user_id);
+			resp.sendRedirect("/semiproject/main/*");
 		} else {
 			System.out.println("로그인 실패");
 			session.setAttribute("isMember", false);
-			resp.sendRedirect("/semiproject/main/login");
+			session.setAttribute("chk", 2);
+			resp.sendRedirect("/semiproject/main/*");
 		}
-
+		
 	} // end login();
 
 	private void logOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -78,8 +82,8 @@ public class UserAction {
 	} // end logout();
 
 	private void signUp(HttpServletRequest req, HttpServletResponse resp) {
-		String user_id = req.getParameter("user_id");
-		String user_pw = req.getParameter("user_pw");
+		String user_id = req.getParameter("id");
+		String user_pw = req.getParameter("pw");
 		String user_name = req.getParameter("name");
 		String user_gender = req.getParameter("gender");
 		String user_address = req.getParameter("city") + req.getParameter("district");
@@ -102,7 +106,10 @@ public class UserAction {
 		memInfo.put("user_id", user_id);
 		memInfo.put("user_pw", user_pw);
 
+		HttpSession session = req.getSession();
+
 		if (dao.memChk(memInfo)) {
+			session.setAttribute("chk", 0);
 			return;
 		}
 
@@ -118,14 +125,7 @@ public class UserAction {
 		UserDTO dto = dao.memberinfo(user_id);
 		System.out.println(dto.getUser_id());
 		if (!(dto.getUser_id() == null)) {
-			/*
-			 * session.setAttribute("user_name", dto.getUser_name());
-			 * session.setAttribute("user_id", dto.getUser_id());
-			 * session.setAttribute("user_email", dto.getUser_email());
-			 * session.setAttribute("user_address", dto.getUser_address());
-			 * session.setAttribute("user_contact", dto.getUser_contact());
-			 * session.setMaxInactiveInterval(30 * 60); // 30분 (아무동작 안할 때!)
-			 */
+		
 			ArrayList<UserDTO> aList = new ArrayList<UserDTO>();
 			aList.add(dto);
 			session.setAttribute("aList", aList);

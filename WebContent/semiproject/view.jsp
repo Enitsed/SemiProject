@@ -50,23 +50,17 @@
 				$('form').submit();
 			});
 			$('.reply_delete').on('click', function(){
-				$('.reply_frm').attr('action', 'reply_delete');
-				$('.reply_frm').submit();
+				$('#reply_frm').attr('action', 'reply_delete');
+				$('#reply_frm').submit();
 			});
+			//댓글 수정
 			
-			var reply_num_val = '<c:forEach items="${rList }" var="rep_dto"><c:out value=",${rep_dto.reply_num}"></c:out></c:forEach>';
-			var reply_num_arr = reply_num_val.toString().split(",");
-			reply_num_arr = reply_num_arr.filter(function(elem){
-			    return elem != ""; 
-			});
-			$.each(reply_num_arr, function(i, elt) {
-				alert(i+":"+elt);
-			});
-			
-			$('.reply_update').on('click', function(){
-			    $('.reply_write_content').val('');
-			});
 	    });
+	    
+	    function update(reply_num){
+  	    	window.open("reply_update?reply_num="+reply_num, "reply_update", "width=550,height=400,top="+(screen.availHeight/2-100)+",left="+(screen.availWidth/2-100)+"");
+  	    	$('#reply_frm').submit();
+  	    }
 	</script>
 	<c:choose>
 		<c:when test="${isMember eq false || memberInfo.user_id == null}">
@@ -187,15 +181,17 @@
 				</td>
 				<!-- 버튼 -->
 				<td width="100">
-					<form class="reply_frm">
-						<input type="hidden" name="reply_num" value="${rList.reply_num}">
+					<form id="reply_frm">
+						<input type="hidden" id="reply_num" name="reply_num" value="${rList.reply_num}">
+						<input type="hidden" id="reply_content" name="reply_content" value="${rList.reply_content}">
 						<input type="hidden" name="num" value="${dto.board_num}">
 						<div id="btn" style="text-align:center;">
-							<a href="#">[답변]</a><br>
 							<!-- 댓글 작성자만 수정, 삭제 가능하도록 -->   
 							<c:if test="${rList.user_id == memberInfo.user_id}">
-							<input type="button" class="reply_update" value="[수정]" />   
-							<input type="button" class="reply_delete" value="[삭제]" />
+								<div class="btn-group btn-group-xs" role="group">
+								<input type="button" class="btn btn-default reply_update" value="수정" onclick="update(${rList.reply_num});" />   
+								<input type="button" class="btn btn-default reply_delete" value="삭제"/>
+							</div>
 							</c:if>
 						</div>
 					</form>
@@ -226,7 +222,7 @@
 				<!-- 댓글 등록 버튼 -->
 				<td width="100">
 					<div id="btn" style="text-align:center;">
-						<p><input type="button" class="reply" value="[댓글등록]"></p>   
+						<p><input type="button" class="btn btn-default reply" value="댓글등록"></p>   
 					</div>
 				</td>
 			</form>

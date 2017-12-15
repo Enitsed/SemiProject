@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -98,6 +98,11 @@
         	 }
            
             });
+         
+         $('#cancelBtn').on('click', function() {
+        	 alert("메인 홈페이지로 돌아갑니다.");
+        	location.href = "/semiproject/main/*";
+            });
 });
 </script>
 </head>
@@ -105,7 +110,7 @@
 	<div id="templatemo_wrapper">
 		<jsp:include page="../semiproject/header.jsp"></jsp:include>
 		<div id="templatemo_main">
-			<div class="container">
+			<div class="container" style="width: 80%;" >
 				<form class="frm" method="post"
 					enctype="application/x-www-form-urlencoded">
 					<table class="table table-bordered">

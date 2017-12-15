@@ -27,42 +27,35 @@
 		<hr size="1" width="460">
 		<br>
 		<div id="chk">
-<% 
-	String user_id= request.getParameter("id");
-	UserDAO dao = UserDAO.getInstance();
-	int check = dao.Confirm_id(user_id);
-	
-	//사용 불가능
-	if(check==1){
-%>
+<c:choose>
+		<c:when test="${x==1}">
 			<form id="checkForm" action="/semiproject/main/confirmId">
 				<input type="text" name="id" id="userId"/> 
 				<input
 					type="submit" value="중복확인" onclick="idCheck()"/>
 			</form>
 			<div id="msg">
-			<font color="red"> <%=user_id%> 는 이미 사용중인 아이디 입니다.</font>
+			<font color="red"> <%=session.getAttribute("confirmId")%> 는 이미 사용중인 아이디 입니다.</font>
 			<br><b>다른 아이디를 입력해주세요.</b>
 			</div>
 			<br> 
 			<input id="cancelBtn" type="button" value="취소"
 				onclick="window.close()"><br>
-<%
-	//사용가능
-	}else{
-%>
+		</c:when>
+		<c:otherwise>
 			<form id="checkForm" action="/semiproject/main/confirmId">
 				<input type="text" name="id" id="userId"/> 
 				<input
 					type="submit" value="중복확인" onclick="idCheck()"/>
 			</form>
 			<div id="msg">
-			<font color="blue"> <%=user_id%> 는 사용 가능한 아이디 입니다.</font>
+			<font color="blue"> <%=session.getAttribute("confirmId")%> 는 사용 가능한 아이디 입니다.</font>
 			</div>
 			<br> 
 			<input id="useBtn"
 				type="button" value="사용하기" onclick="sendCheckValue()">
-<%}%>
+		</c:otherwise>
+		</c:choose>
 	</div>
 </div> 
 <script type="text/javascript">
@@ -85,7 +78,7 @@
         // 중복체크 결과인 idCheck 값을 전달한다.
         opener.document.memberInfo.idDuplication.value="idCheck";
         // 회원가입 화면의 ID입력란에 값을 전달
-        opener.document.memberInfo.id.value = "<%=user_id%>";
+        opener.document.memberInfo.id.value = "<%= session.getAttribute("confirmId")%>";
         
         if (opener != null) {
             opener.chkForm = null;

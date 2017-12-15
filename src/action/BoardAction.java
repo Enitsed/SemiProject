@@ -30,7 +30,7 @@ public class BoardAction {
 		Boolean isMember = (Boolean) session.getAttribute("isMember");
 		UserDTO dto = (UserDTO) session.getAttribute("memberInfo");
 
-		if (command.equals("list") || command.equals("location_boardList")) {
+		if (command.equals("list")) {
 			listAction(req, resp);
 		} else if (command.equals("view")) {
 			viewAction(req, resp, isMember, dto);
@@ -69,6 +69,10 @@ public class BoardAction {
 			} catch (NumberFormatException | IOException e) {
 				e.printStackTrace();
 			}
+		} else if (command.equals("reply_update")) {
+			replyUpdateAction(req, resp);
+		} else if (command.equals("reply_modify")) {
+			replyModifyAction(req, resp);
 		}
 
 	} // end execute();
@@ -123,7 +127,10 @@ public class BoardAction {
 		HttpSession session = req.getSession();
 		Boolean isWriter = (Boolean) session.getAttribute("isWriter");
 		BoardDAO dao = BoardDAO.getInstance();
-		int num = Integer.parseInt(req.getParameter("num"));
+		int num=0;
+		if(req.getParameter("num")!=null) {
+			num = Integer.parseInt(req.getParameter("num"));
+		}
 		BoardDTO bdto = dao.viewMethod(num);
 		String saveDirectory = req.getSession().getServletContext().getRealPath("/") + "semiproject/upload";
 		String filePath = bdto.getBoard_upload();
@@ -266,10 +273,8 @@ public class BoardAction {
 		String category = req.getParameter("category"); // 보여줄 카테고리
 		String searchValue = req.getParameter("searchValue");
 		String searchKey = req.getParameter("searchKey");
-		String locations = req.getParameter("location");
-		int location = -1; // Integer.parseInt(locations);
 		List<BoardDTO> aList = null;
-		int boardCount = dao.countRow(category, searchKey, searchValue, location); // 해당 카테고리 글 수
+		int boardCount = dao.countRow(category, searchKey, searchValue); // 해당 카테고리 글 수
 		int currentPage = 1; // 현재 페이지
 		if (req.getParameter("pageNum") != null) {
 			currentPage = Integer.parseInt(req.getParameter("pageNum")); // 현재 페이지
@@ -277,13 +282,12 @@ public class BoardAction {
 		}
 		final int startPage = 1; // 시작 페이지
 		int pageCount = pageCount(boardCount); // 페이지 개수
-		
 		final int showRows = 9; // 보여줄 글 개수
 		int startRow = (currentPage - 1) * showRows + 1; // 어디서 부터 보여줄 것인지
 		int endRow = currentPage * showRows; // 어디까지 보여줄 것인지
 
 		System.out.println(searchValue + " : " + searchKey);
-		aList = dao.listMethod(category, startRow, endRow, searchValue, searchKey, location);
+		aList = dao.listMethod(category, startRow, endRow, searchValue, searchKey);
 		req.setAttribute("searchKey", searchKey); // 검색 키
 		req.setAttribute("searchValue", searchValue); // 검색 값
 		req.setAttribute("endPage", pageCount); // 마지막 페이지
@@ -320,5 +324,24 @@ public class BoardAction {
 		ReplyDAO dao = ReplyDAO.getInstance();
 		dao.replyDeleteMethod(num);
 	} /////////////// 댓글삭제
+	
+	private void replyUpdateAction(HttpServletRequest req, HttpServletResponse resp) {
+		int reply_num = Integer.parseInt(req.getParameter("reply_num"));
+		System.out.println(reply_num);
+		String reply_content = req.getParameter("reply_content");
+		System.out.println(reply_content);
+		ReplyDAO dao = ReplyDAO.getInstance();
+		ReplyDTO dto = dao.getReply(reply_num);
+		req.setAttribute("replydto", dto);
+	} ////////////// 수정할 댓글 정보 받아오기
+	
+	private void replyModifyAction(HttpServletRequest req, HttpServletResponse resp) {
+		String reply_content = req.getParameter("comment_content");
+		int reply_num = Integer.parseInt(req.getParameter("modify_num"));
+		System.out.println(reply_num);
+		System.out.println(reply_content);
+		ReplyDAO dao = ReplyDAO.getInstance();
+		dao.updateMethod(reply_content, reply_num);
+	} ////////////// 댓글 수정
 
 } // end class

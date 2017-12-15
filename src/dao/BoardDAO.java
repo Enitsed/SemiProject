@@ -51,45 +51,31 @@ public class BoardDAO {
 
 	//////////////////////// 목록
 
-	public int countRow(String category, String searchKey, String searchValue, int location) {
+	public int countRow(String category, String searchKey, String searchValue) {
 		int count = 0;
 		try {
 			conn = init();
 			if (category == null || category.equals("")) {
 				String sql = "select count(*) from board";
 				if (searchValue != null && !searchValue.equals("")) {
-					if (searchKey.equals("all")) {
+					if (searchKey.equals("all"))
 						sql += " where board_subject like lower('%" + searchValue + "%') or board_content like lower('%"
 								+ searchValue + "%') or user_id like lower('%" + searchValue + "%')";
-						if (location >= 0) {
-							sql += " and board_loc=" + location;
-						}
-					}
 					if (searchKey.equals("board_subject") || searchKey.equals("user_id")
 							|| searchKey.equals("board_content")) {
 						sql += " where lower(" + searchKey + ") like lower('%" + searchValue + "%')";
-						if (location >= 0) {
-							sql += " and board_loc=" + location;
-						}
 					}
 				}
 				pstmt = conn.prepareStatement(sql);
 			} else {
 				String sql = "select count(*) from board where board_category=?";
 				if (searchValue != null && !searchValue.equals("")) {
-					if (searchKey.equals("all")) {
+					if (searchKey.equals("all"))
 						sql += " and board_subject like lower('%" + searchValue + "%') or board_content like lower('%"
 								+ searchValue + "%') or user_id like lower('%" + searchValue + "%')";
-						if (location >= 0) {
-							sql += " and board_loc=" + location;
-						}
-					}
 					if (searchKey.equals("board_subject") || searchKey.equals("user_id")
 							|| searchKey.equals("board_content")) {
 						sql += " and lower(" + searchKey + ") like lower('%" + searchValue + "%')";
-						if (location >= 0) {
-							sql += " and board_loc=" + location;
-						}
 					}
 				}
 				pstmt = conn.prepareStatement(sql);
@@ -99,16 +85,13 @@ public class BoardDAO {
 			while (rs.next()) {
 				count = rs.getInt("count(*)");
 			}
-		} catch (ClassNotFoundException |
-
-				SQLException e) {
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 		return count;
 	}
 
-	public List<BoardDTO> listMethod(String category, int startRow, int endRow, String searchValue, String searchKey,
-			int location) {
+	public List<BoardDTO> listMethod(String category, int startRow, int endRow, String searchValue, String searchKey) {
 		List<BoardDTO> aList = new ArrayList<BoardDTO>();
 		String sql = null;
 		try {
@@ -118,16 +101,12 @@ public class BoardDAO {
 				if (searchValue != null && !searchValue.equals("")) {
 					// 검색 할때
 					sql = "select b.* from (select rownum as rm, a.* from (select * from board";
-					if (searchKey.equals("all")) {
+					if (searchKey.equals("all"))
 						sql += " where board_subject like lower('%" + searchValue + "%') or board_content like lower('%"
 								+ searchValue + "%') or user_id like lower('%" + searchValue + "%')";
-					}
 					if (searchKey.equals("board_subject") || searchKey.equals("user_id")
 							|| searchKey.equals("board_content")) {
 						sql += " where lower(" + searchKey + ") like lower('%" + searchValue + "%')";
-					}
-					if (location >= 0) {
-						sql += " and board_loc=" + location;
 					}
 					sql += " order by board_date desc)a)b where b.rm between ? and ?";
 					pstmt = conn.prepareStatement(sql);
@@ -136,9 +115,6 @@ public class BoardDAO {
 				} else {
 					// 검색 값이 없으면
 					sql = "select b.* from (select rownum as rm, a.* from (select * from board order by board_date desc)a)b where b.rm between ? and ?";
-					if (location >= 0) {
-						sql += " and board_loc=" + location;
-					}
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setInt(1, startRow);
 					pstmt.setInt(2, endRow);
@@ -154,9 +130,6 @@ public class BoardDAO {
 							|| searchKey.equals("board_content")) {
 						sql += " and lower(" + searchKey + ") like lower('%" + searchValue + "%')";
 					}
-					if (location >= 0) {
-						sql += " and board_loc=" + location;
-					}
 					sql += " order by board_date desc)a)b where b.rm between ? and ?";
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, category);
@@ -164,9 +137,6 @@ public class BoardDAO {
 					pstmt.setInt(3, endRow);
 				} else {
 					sql = "select b.* from (select rownum as rm, a.* from (select * from board where board_category=? order by board_date desc)a)b where b.rm between ? and ?";
-					if (location >= 0) {
-						sql += " and board_loc=" + location;
-					}
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, category);
 					pstmt.setInt(2, startRow);
