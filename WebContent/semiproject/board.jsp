@@ -26,14 +26,19 @@ $(document).ready(function() {
 			<div class="navbar container">
 				<ol class="breadcrumb" style="background-color: white">
 				  <li><a href="/semiproject/main/*">Home</a></li>
-				  <li><a href="?category=${requestScope.category }&searchKey=${requestScope.searchKey }&searchValue=${requestScope.searchValue }">게시판</a></li>
-				  <li class="active">${location }</li>
+					  <c:url var="link" value="board">
+						  <c:param name="category" value="${requestScope.category }"></c:param>
+						  <c:param name="searchKey" value="${requestScope.searchKey }"></c:param>
+						  <c:param name="searchValue" value="${requestScope.searchValue }"></c:param>
+					  </c:url>
+				  <li><a href="${link }">전체게시판</a></li>
+				  <li class="active">${param.city} ${param.location }</li>
 				</ol>
 				<div class="list-group">
 					<c:url var="category" value="board">
 						<c:param name="category"></c:param>
 					</c:url>
-					<a href="${category }연애" class="list-group-item">연애 
+					<a href="${category }자유게시판" class="list-group-item">자유게시판 
 						<span class="label label-default">New</span>
 					</a>
 					<a href="${category }스터디" class="list-group-item">스터디
@@ -42,7 +47,13 @@ $(document).ready(function() {
 					<a href="${category }맛집" class="list-group-item">맛집
 						<span class="label label-default">New</span>
 					</a>
-					<a href="${category }질문게시판" class="list-group-item">질문게시판
+					<a href="${category }스포츠" class="list-group-item">스포츠
+						<span class="label label-default">New</span>
+					</a>
+					<a href="${category }동호회" class="list-group-item">동호회
+						<span class="label label-default">New</span>
+					</a>
+					<a href="${category }동네소식" class="list-group-item">동네소식
 						<span class="label label-default">New</span>
 					</a>
 				</div>

@@ -5,7 +5,7 @@ create table users(
    user_pw varchar2(20) not null,
    user_gender varchar2(10),
    user_email varchar2(20),
-   user_address varchar2(20),
+   user_address varchar2(50),
    user_contact varchar2(20),
    user_birthday varchar2(20),
    user_join_date date
@@ -27,12 +27,12 @@ create table board(
    board_readcount number,
    board_upload varchar2(500),
    board_content varchar2(300) not null,
-   board_loc_code number not null,
-   board_loc_city_code number not null,
+   board_loc_code varchar2(50) not null,
+   board_loc_city_code varchar2(50) not null,
    board_category varchar2(50) not null
 );
 select * from board
-insert into board values('lhs5', board_seq.nextval, '다섯번째', sysdate, 1, null,'안녕하세요', 1, 1, '연애')
+insert into board values('glglgl', board_seq.nextval, '다섯번째', sysdate, 0, null,'안녕하세요', '서울', '강남구', '스터디')
 create sequence board_seq start with 1 increment by 1 nocache nocycle;
 update board set board_subject='asdasd', board_content='asdasdasd', board_loc_city_code=1, board_loc_code=2, board_category='연애' where board_num=15
 drop sequence board_seq

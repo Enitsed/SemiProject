@@ -153,7 +153,8 @@ public class BoardDAO {
 				dto.setBoard_readcount(rs.getInt("board_readcount"));
 				dto.setBoard_upload(rs.getString("board_upload"));
 				dto.setBoard_content(rs.getString("board_content"));
-				dto.setBoard_loc_code(rs.getInt("board_loc_code"));
+				dto.setBoard_loc_code(rs.getString("board_loc_code"));
+				dto.setBoard_loc_city_code(rs.getString("board_loc_city_code"));
 				dto.setBoard_category(rs.getString("board_category"));
 
 				aList.add(dto);
@@ -188,8 +189,8 @@ public class BoardDAO {
 				dto.setBoard_readcount(rs.getInt("board_readcount"));
 				dto.setBoard_upload(rs.getString("board_upload"));
 				dto.setBoard_content(rs.getString("board_content"));
-				dto.setBoard_loc_code(rs.getInt("board_loc_code"));
-				dto.setBoard_loc_city_code(rs.getInt("board_loc_city_code"));
+				dto.setBoard_loc_code(rs.getString("board_loc_code"));
+				dto.setBoard_loc_city_code(rs.getString("board_loc_city_code"));
 				dto.setBoard_category(rs.getString("board_category"));
 
 				return dto;
@@ -234,8 +235,8 @@ public class BoardDAO {
 			pstmt.setString(2, boardDto.getBoard_subject());
 			pstmt.setString(3, boardDto.getBoard_upload());
 			pstmt.setString(4, boardDto.getBoard_content());
-			pstmt.setInt(5, boardDto.getBoard_loc_city_code());
-			pstmt.setInt(6, boardDto.getBoard_loc_code());
+			pstmt.setString(5, boardDto.getBoard_loc_city_code());
+			pstmt.setString(6, boardDto.getBoard_loc_code());
 			pstmt.setString(7, boardDto.getBoard_category());
 			pstmt.executeUpdate();
 
@@ -298,8 +299,8 @@ public class BoardDAO {
 			pstmt.setString(1, boardDto.getBoard_subject());
 			pstmt.setString(2, boardDto.getBoard_upload());
 			pstmt.setString(3, boardDto.getBoard_content());
-			pstmt.setInt(4, boardDto.getBoard_loc_city_code());
-			pstmt.setInt(5, boardDto.getBoard_loc_code());
+			pstmt.setString(4, boardDto.getBoard_loc_city_code());
+			pstmt.setString(5, boardDto.getBoard_loc_code());
 			pstmt.setString(6, boardDto.getBoard_category());
 			pstmt.setInt(7, boardDto.getBoard_num());
 			System.out.println(boardDto.getBoard_num());

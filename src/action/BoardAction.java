@@ -59,7 +59,6 @@ public class BoardAction {
 			try {
 				resp.sendRedirect("/semiproject/main/view?num=" + Integer.parseInt(req.getParameter("num")));
 			} catch (NumberFormatException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else if (command.equals("reply_delete")) {
@@ -127,8 +126,8 @@ public class BoardAction {
 		HttpSession session = req.getSession();
 		Boolean isWriter = (Boolean) session.getAttribute("isWriter");
 		BoardDAO dao = BoardDAO.getInstance();
-		int num=0;
-		if(req.getParameter("num")!=null) {
+		int num = 0;
+		if (req.getParameter("num") != null) {
 			num = Integer.parseInt(req.getParameter("num"));
 		}
 		BoardDTO bdto = dao.viewMethod(num);
@@ -193,9 +192,9 @@ public class BoardAction {
 		bdto.setBoard_subject(multi.getParameter("subject"));
 		bdto.setBoard_content(multi.getParameter("content"));
 		if (!multi.getParameter("city_menu").equals(""))
-			bdto.setBoard_loc_city_code(Integer.parseInt(multi.getParameter("city_menu")));
+			bdto.setBoard_loc_city_code(multi.getParameter("city_menu"));
 		if (!multi.getParameter("loc_menu").equals(""))
-			bdto.setBoard_loc_code(Integer.parseInt(multi.getParameter("loc_menu")));
+			bdto.setBoard_loc_code(multi.getParameter("loc_menu"));
 
 		bdto.setBoard_category(multi.getParameter("category_menu"));
 		bdto.setBoard_num(num);
@@ -230,9 +229,9 @@ public class BoardAction {
 		bdto.setBoard_upload(multi.getFilesystemName("upload"));
 		bdto.setBoard_content(multi.getParameter("content"));
 		if (!multi.getParameter("city_menu").equals(""))
-			bdto.setBoard_loc_city_code(Integer.parseInt(multi.getParameter("city_menu")));
+			bdto.setBoard_loc_city_code(multi.getParameter("city_menu"));
 		if (!multi.getParameter("loc_menu").equals(""))
-			bdto.setBoard_loc_code(Integer.parseInt(multi.getParameter("loc_menu")));
+			bdto.setBoard_loc_code(multi.getParameter("loc_menu"));
 		bdto.setBoard_category(multi.getParameter("category_menu"));
 
 		BoardDAO dao = BoardDAO.getInstance();
@@ -273,6 +272,8 @@ public class BoardAction {
 		String category = req.getParameter("category"); // 보여줄 카테고리
 		String searchValue = req.getParameter("searchValue");
 		String searchKey = req.getParameter("searchKey");
+		String board_loc = req.getAttribute("board_loc").toString();
+		
 		List<BoardDTO> aList = null;
 		int boardCount = dao.countRow(category, searchKey, searchValue); // 해당 카테고리 글 수
 		int currentPage = 1; // 현재 페이지
@@ -281,8 +282,12 @@ public class BoardAction {
 			req.setAttribute("currentPage", currentPage);
 		}
 		final int startPage = 1; // 시작 페이지
-		int pageCount = pageCount(boardCount); // 페이지 개수
-		final int showRows = 9; // 보여줄 글 개수
+		int pageCount = pageCount(boardCount ,board_loc); // 페이지 개수
+		int showRows = 9; // 보여줄 글 개수
+		if (board_loc != null) {
+			if (board_loc.equals("seoul") || board_loc.equals("gyeonggi") || board_loc.equals("index"))
+				showRows = 5;
+		}
 		int startRow = (currentPage - 1) * showRows + 1; // 어디서 부터 보여줄 것인지
 		int endRow = currentPage * showRows; // 어디까지 보여줄 것인지
 
@@ -296,8 +301,12 @@ public class BoardAction {
 		req.setAttribute("aList", aList); // 보여줄 글 목록
 	} // end listAction();
 
-	private int pageCount(int boardCount) {
+	private int pageCount(int boardCount, String board_loc) {
 		int showRows = 9; // 보여줄 게시글 수
+		if (board_loc != null) {
+			if (board_loc.equals("seoul") || board_loc.equals("gyeonggi") || board_loc.equals("index"))
+				showRows = 5;
+		}
 		int pageCnt = (boardCount % showRows) > 0 ? (boardCount / showRows) + 1 : 0;
 		// boardCount(게시글 수)를 showRows(보여줄 게시글 수)로 나눈 수가 0보다 크면 1페이지를 더 추가한다.
 		if (pageCnt < 1) {
@@ -324,7 +333,7 @@ public class BoardAction {
 		ReplyDAO dao = ReplyDAO.getInstance();
 		dao.replyDeleteMethod(num);
 	} /////////////// 댓글삭제
-	
+
 	private void replyUpdateAction(HttpServletRequest req, HttpServletResponse resp) {
 		int reply_num = Integer.parseInt(req.getParameter("reply_num"));
 		System.out.println(reply_num);
@@ -334,7 +343,7 @@ public class BoardAction {
 		ReplyDTO dto = dao.getReply(reply_num);
 		req.setAttribute("replydto", dto);
 	} ////////////// 수정할 댓글 정보 받아오기
-	
+
 	private void replyModifyAction(HttpServletRequest req, HttpServletResponse resp) {
 		String reply_content = req.getParameter("comment_content");
 		int reply_num = Integer.parseInt(req.getParameter("modify_num"));
