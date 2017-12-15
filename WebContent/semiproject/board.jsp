@@ -24,7 +24,11 @@ $(document).ready(function() {
 </script>
 		<div id="templatemo_main">
 			<div class="navbar container">
-				<p class="">서울 강남구</p>
+				<ol class="breadcrumb" style="background-color: white">
+				  <li><a href="/semiproject/main/*">Home</a></li>
+				  <li><a href="?category=${requestScope.category }&searchKey=${requestScope.searchKey }&searchValue=${requestScope.searchValue }">게시판</a></li>
+				  <li class="active">${location }</li>
+				</ol>
 				<div class="list-group">
 					<c:url var="category" value="board">
 						<c:param name="category"></c:param>
@@ -84,7 +88,7 @@ $(document).ready(function() {
 							</a>
 						</li>
 						<c:forEach begin="${startPage }" end="${endPage }" var="pageNum" >
-							<li>
+							<li <c:if test="${pageNum eq param.pageNum }">class="active"</c:if>>
 								<a <c:if test="${pageNum ne param.pageNum}">href="?pageNum=${pageNum }&category=${requestScope.category }&searchKey=${requestScope.searchKey }&searchValue=${requestScope.searchValue }"</c:if>>${pageNum}</a>
 							</li>
 						</c:forEach>

@@ -40,6 +40,9 @@ public class SemiController extends HttpServlet {
 			path = "/semiproject/index.jsp";
 		} else if (action.equals("/seoul")) {
 			req.setAttribute("board_loc", "seoul");
+			command = "location_boardList";
+			req.setAttribute("command", command);
+			boardAction.execute(req, resp);
 			path = "/semiproject/seoul.jsp";
 		} else if (action.equals("/gyeonggi")) {
 			req.setAttribute("board_loc", "gyeonggi");
@@ -77,9 +80,9 @@ public class SemiController extends HttpServlet {
 			command = "download";
 			req.setAttribute("command", command);
 			boardAction.execute(req, resp);
-		} else if (action.equals("/delete")) {
+		} else if (action.equals("/delete_board")) {
 			// 글 삭제
-			command = "delete";
+			command = "delete_board";
 			req.setAttribute("command", command);
 			boardAction.execute(req, resp);
 			resp.sendRedirect("/semiproject/main/board");

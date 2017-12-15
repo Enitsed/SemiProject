@@ -30,13 +30,13 @@ public class BoardAction {
 		Boolean isMember = (Boolean) session.getAttribute("isMember");
 		UserDTO dto = (UserDTO) session.getAttribute("memberInfo");
 
-		if (command.equals("list")) {
+		if (command.equals("list") || command.equals("location_boardList")) {
 			listAction(req, resp);
 		} else if (command.equals("view")) {
 			viewAction(req, resp, isMember, dto);
 		} else if (command.equals("write")) {
 			writeAction(req, resp, isMember, dto);
-		} else if (command.equals("delete")) {
+		} else if (command.equals("delete_board")) {
 			deleteAction(req, resp, isMember, dto);
 		} else if (command.equals("download")) {
 			fileDownloadAction(req, resp, isMember);
@@ -266,8 +266,10 @@ public class BoardAction {
 		String category = req.getParameter("category"); // 보여줄 카테고리
 		String searchValue = req.getParameter("searchValue");
 		String searchKey = req.getParameter("searchKey");
+		String locations = req.getParameter("location");
+		int location = -1; // Integer.parseInt(locations);
 		List<BoardDTO> aList = null;
-		int boardCount = dao.countRow(category, searchKey, searchValue); // 해당 카테고리 글 수
+		int boardCount = dao.countRow(category, searchKey, searchValue, location); // 해당 카테고리 글 수
 		int currentPage = 1; // 현재 페이지
 		if (req.getParameter("pageNum") != null) {
 			currentPage = Integer.parseInt(req.getParameter("pageNum")); // 현재 페이지
@@ -275,12 +277,13 @@ public class BoardAction {
 		}
 		final int startPage = 1; // 시작 페이지
 		int pageCount = pageCount(boardCount); // 페이지 개수
+		
 		final int showRows = 9; // 보여줄 글 개수
 		int startRow = (currentPage - 1) * showRows + 1; // 어디서 부터 보여줄 것인지
 		int endRow = currentPage * showRows; // 어디까지 보여줄 것인지
 
 		System.out.println(searchValue + " : " + searchKey);
-		aList = dao.listMethod(category, startRow, endRow, searchValue, searchKey);
+		aList = dao.listMethod(category, startRow, endRow, searchValue, searchKey, location);
 		req.setAttribute("searchKey", searchKey); // 검색 키
 		req.setAttribute("searchValue", searchValue); // 검색 값
 		req.setAttribute("endPage", pageCount); // 마지막 페이지

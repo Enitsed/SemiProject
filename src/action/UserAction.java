@@ -31,9 +31,9 @@ public class UserAction {
 			findId(req, resp);
 		} else if (command == "findpw") {
 			findPw(req, resp);
-		} /*else if (command == "delete") {
-			delete(req, resp);
-		}*/
+		} /*
+			 * else if (command == "delete") { delete(req, resp); }
+			 */
 
 	} // end execute();
 

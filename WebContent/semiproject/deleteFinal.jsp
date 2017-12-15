@@ -30,28 +30,28 @@
 		UserDAO dao = UserDAO.getInstance();
 		int ok = dao.deleteMem(user_id, user_pw);
 
-		if(ok == 1){
+		if (ok == 1) {
 			session.invalidate();
 	%>
 	<div id="templatemo_wrapper">
 		<jsp:include page="../semiproject/header.jsp" />
 		<form action="/semiproject/main/*" method="post">
-		<div id="templatemo_main" align="center">
-			<h1>탈퇴가 완료되었습니다.</h1>
-			<h3> 10초후 자동으로 메인 홈페이지로 이동됩니다.</h3>
-			<meta http-equiv="Refresh" content="10;url=*">
-			<button type="submit" class="btn btn-success" id="main_back">메인 홈페이지로 돌아가기</button>
-		</div>
+			<div id="templatemo_main" align="center">
+				<h1>탈퇴가 완료되었습니다.</h1>
+				<h3>10초후 자동으로 메인 홈페이지로 이동됩니다.</h3>
+				<meta http-equiv="Refresh" content="10;url=*">
+				<button type="submit" class="btn btn-success" id="main_back">메인
+					홈페이지로 돌아가기</button>
+			</div>
 		</form>
 	</div>
 	<%
-		}
-		else{
+		} else {
 	%>
 	<script type="text/javascript">
-		alert("비밀번호가 맞지 않습니다.");
-		history.go(-1); //뒤로 가기
-	</script>
+	alert("비밀번호가 맞지 않습니다.");
+	history.go(-1); //뒤로 가기
+    </script>
 
 	<%
 		}

@@ -40,7 +40,7 @@
 			    $('form').submit();
 			});
 			$('.delete').on('click', function(){
-			    $('form').attr('action', 'delete?num=' + num);
+			    $('form').attr('action', 'delete_board?num=' + num);
 			    $('form').submit();
 			});
 			
