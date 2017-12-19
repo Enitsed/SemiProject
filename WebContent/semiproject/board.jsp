@@ -21,39 +21,36 @@ $(document).ready(function() {
 	})
 
 });
+
 </script>
 		<div id="templatemo_main">
 			<div class="navbar container">
-				<ol class="breadcrumb" style="background-color: white">
+				<ol class="breadcrumb" style="background-color: white;">
 				  <li><a href="/semiproject/main/*">Home</a></li>
-					  <c:url var="link" value="board">
-						  <c:param name="category" value="${requestScope.category }"></c:param>
-						  <c:param name="searchKey" value="${requestScope.searchKey }"></c:param>
-						  <c:param name="searchValue" value="${requestScope.searchValue }"></c:param>
-					  </c:url>
-				  <li><a href="${link }">전체게시판</a></li>
-				  <li class="active">${param.city} ${param.location }</li>
+				  <li><a href="?category=${requestScope.category }&searchKey=${requestScope.searchKey }&searchValue=${requestScope.searchValue }">전체게시판</a></li>
+				  <li class="active"><a href="#">${requestScope.location}</a></li>
+
 				</ol>
 				<div class="list-group">
-					<c:url var="category" value="board">
-						<c:param name="category"></c:param>
+					<c:url var="link" value="board">
+						<c:param name="location" value="${requestScope.location }"></c:param>
 					</c:url>
-					<a href="${category }자유게시판" class="list-group-item">자유게시판 
+					<a href="${link }&category=자유게시판" class="list-group-item">자유게시판
 						<span class="label label-default">New</span>
 					</a>
-					<a href="${category }스터디" class="list-group-item">스터디
+					<a href="${link }&category=스터디" class="list-group-item">스터디 
 						<span class="label label-default">New</span>
 					</a>
-					<a href="${category }맛집" class="list-group-item">맛집
+					<a href="${link }&category=맛집" class="list-group-item">맛집
 						<span class="label label-default">New</span>
 					</a>
-					<a href="${category }스포츠" class="list-group-item">스포츠
+					<a href="${link }&category=스포츠" class="list-group-item">스포츠
 						<span class="label label-default">New</span>
 					</a>
-					<a href="${category }동호회" class="list-group-item">동호회
+					<a href="${link }&category=동호회" class="list-group-item">동호회
 						<span class="label label-default">New</span>
 					</a>
-					<a href="${category }동네소식" class="list-group-item">동네소식
+					<a href="${link }&category=동네소식" class="list-group-item">동네소식
 						<span class="label label-default">New</span>
 					</a>
 				</div>
@@ -80,8 +77,8 @@ $(document).ready(function() {
 										<img src="../semiproject/upload/${dto.board_upload }" class="img-rounded" />
 									</c:otherwise>
 								</c:choose>
-								<span>[ ${dto.board_category}] ${dto.board_subject }</span>
-								<span class="badge">${dto.board_readcount }</span>
+								<span>[${dto.board_loc_city_code}][ ${dto.board_category}] ${dto.board_subject }</span>
+								<span class="badge">${dto.board_readcount }</span><br/>
 								<span>${dto.board_date }</span>
 								</a>
 							</article>
@@ -121,6 +118,7 @@ $(document).ready(function() {
 						</select>
 						<input type="text" class="form-control" placeholder="검색할 글 입력" name="searchValue" />
 						<input type="hidden" name="category" value="${requestScope.category }" />
+						<input type="hidden" name="location" value="${requestScope.location }" />
 						<button type="submit" class="btn btn-default" id="searchBtn">검색</button>
 					</form>
 					<c:if test="${isMember == true }">

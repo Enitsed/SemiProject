@@ -35,6 +35,7 @@ public class SemiController extends HttpServlet {
 		BoardAction boardAction = new BoardAction(); // 게시판 관련 명령어 처리 객체
 
 		if (action.equals("/*") || action.equals("/index")) {
+			// 초기화면 수정필요
 			command = "list";
 			req.setAttribute("board_loc", "index");
 			req.setAttribute("command", command);
@@ -53,10 +54,16 @@ public class SemiController extends HttpServlet {
 			boardAction.execute(req, resp);
 			path = "/semiproject/gyeonggi.jsp";
 		} else if (action.equals("/gallery")) {
+			command = "list";
+			req.setAttribute("command", command);
 			req.setAttribute("board_loc", "gallery");
+			boardAction.execute(req, resp);
 			path = "/semiproject/gallery.jsp";
 		} else if (action.equals("/contact")) {
+			command = "list";
+			req.setAttribute("command", command);
 			req.setAttribute("board_loc", "contact");
+			boardAction.execute(req, resp);
 			path = "/semiproject/contact.jsp";
 		}
 		////////////////////////////////////////////////////

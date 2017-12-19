@@ -97,9 +97,7 @@ select {
 								"width=500, height=300, resizable = no, scrollbars = no");
 			}
 
-			$(document)
-					.ready(
-							function() {
+			$(document).ready(function() {
 								var area0 = [ "시/도 선택", "서울특별시", "경기도" ];
 								var area1 = [ "강남구", "강동구", "강북구", "강서구",
 										"관악구", "광진구", "구로구", "금천구", "노원구",
@@ -117,56 +115,24 @@ select {
 										"여주군", "연천군" ];
 
 								$("select[name=city]")
-										.each(
-												function() {
-													$selcity = $(this);
-													$
-															.each(
-																	eval(area0),
-																	function() {
-																		$selcity
-																				.append("<option value='"+this+"'>"
-																						+ this
-																						+ "</option>");
-																	});
-													$selcity
-															.next()
-															.append(
-																	"<option value=''>구/군 선택</option>");
-												});
+										.each(function() {$selcity = $(this);
+										 $.each(eval(area0),function() {$selcity.append("<option value='"+this+"'>"+ this+ "</option>");});
+													$selcity.next().append("<option value=''>구/군 선택</option>");
+										});
 
 								// 시/도 선택시 구/군 설정
 
-								$("select[name=city]")
-										.change(
-												function() {
-													var area = "area"
-															+ $("option",
-																	$(this))
-																	.index(
-																			$(
-																					"option:selected",
-																					$(this))); // 선택지역의 구군 Array
-													var $district = $(this)
-															.next(); // 선택영역 군구 객체
-													$("option", $district)
-															.remove(); // 구군 초기화
-
-													if (area == "area0")
-														$district
-																.append("<option value=''>구/군 선택</option>");
-													else {
-														$
-																.each(
-																		eval(area),
-																		function() {
-																			$district
-																					.append("<option value='"+this+"'>"
-																							+ this
-																							+ "</option>");
-																		});
-													}
-												});
+								$("select[name=city]").change(function() {var area = "area"+ $("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
+											var $district = $(this).next(); // 선택영역 군구 객체
+												$("option", $district).remove(); // 구군 초기화
+												if (area == "area0")
+												   $district.append("<option value=''>구/군 선택</option>");
+											    else {
+											    	$.each(eval(area),function() {
+													   $district.append("<option value='"+this+"'>"+ this+ "</option>");
+													});
+												}
+								});
 
 								$('#cancelBtn').on('click', function() {
 									alert("회원가입을 취소하셨습니다.");

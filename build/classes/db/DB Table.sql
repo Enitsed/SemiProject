@@ -5,7 +5,7 @@ create table users(
    user_pw varchar2(20) not null,
    user_gender varchar2(10),
    user_email varchar2(20),
-   user_address varchar2(50),
+   user_address varchar2(30),
    user_contact varchar2(20),
    user_birthday varchar2(20),
    user_join_date date
@@ -32,7 +32,9 @@ create table board(
    board_category varchar2(50) not null
 );
 select * from board
-insert into board values('glglgl', board_seq.nextval, '다섯번째', sysdate, 0, null,'안녕하세요', '서울', '강남구', '스터디')
+select * from board where board_loc_code = '서울특별시'
+SELECT b.* FROM( SELECT rownum rm, a.* FROM(SELECT * FROM board where board_loc_code='서울특별시' and board_loc_city_code='서대문구' order by board_date desc) a ) b WHERE b.rm >= 1 and b.rm < 5
+insert into board values('lhs5', board_seq.nextval, '다섯번째', sysdate, 1, null,'안녕하세요', 1, 1, '연애')
 create sequence board_seq start with 1 increment by 1 nocache nocycle;
 update board set board_subject='asdasd', board_content='asdasdasd', board_loc_city_code=1, board_loc_code=2, board_category='연애' where board_num=15
 drop sequence board_seq
@@ -42,18 +44,7 @@ select b.* from (select rownum as rm, a.* from
 			a)b where b.rm between 1 and 9;
 
 select count(*) from board where lower(user_id) like lower('%lh%')
-
-
-create table board_re(
-   user_id varchar2(20) CONSTRAINTS board_re_user_id_fk REFERENCES users(user_id) on delete cascade ,
-   board_num number CONSTRAINTS board_re_board_num_fk REFERENCES board(board_num) on delete cascade,
-   re_subject varchar2(50) not null,
-   re_date date not null,
-   re_readcount number,
-   re_upload varchar2(500),
-   re_content varchar2(300) not null
-);
-
+delete from board where board_num = 1;
 drop table board_re
 
 create table reply(
@@ -66,8 +57,14 @@ create table reply(
 select * from reply
 drop table reply
 
-create sequence reply_seq start with 1 increment by 1 nocache nocycle;
 
+select b.* from (select rownum as rm, a.* from (select * from board where board_loc_city_code ='의정부시' or board_loc_city_code ='양주시' order by board_date desc)a)b where b.rm between 1 and 5
+select count(*) from board where board_subject like lower('%dd%') or board_content like lower('%ad%') or user_id like lower('%ad%') or board_loc_city_code ='의정부시' or board_loc_city_code ='양주시' or board_loc_city_code ='포천시'
+select b.* from (select rownum as rm, a.* from (select * from board order by board_date desc)a)b where b.rm between 1 and 5 and board_loc_city_code ='의정부시' or board_loc_city_code ='양주시' or board_loc_city_code ='포천시'
+
+
+create sequence reply_seq start with 1 increment by 1 nocache nocycle;
+drop sequence reply_seq
 insert into users
  values(user_seq.nextval,'홍길동','홍길동','홍길동','남','g@g.com','서울', '010-8958-0333', '20170123', sysdate);
 

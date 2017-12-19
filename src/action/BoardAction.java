@@ -59,6 +59,7 @@ public class BoardAction {
 			try {
 				resp.sendRedirect("/semiproject/main/view?num=" + Integer.parseInt(req.getParameter("num")));
 			} catch (NumberFormatException | IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else if (command.equals("reply_delete")) {
@@ -273,16 +274,25 @@ public class BoardAction {
 		String searchValue = req.getParameter("searchValue");
 		String searchKey = req.getParameter("searchKey");
 		String board_loc = req.getAttribute("board_loc").toString();
-		
+		String location = req.getParameter("location");
+		String[] locations = null;
+		if (location != null) {
+			locations = location.split("·");
+			for (String a : locations) {
+				System.out.println(a);
+			}
+		}
+
 		List<BoardDTO> aList = null;
-		int boardCount = dao.countRow(category, searchKey, searchValue); // 해당 카테고리 글 수
+		List<BoardDTO> fList = null;
+		int boardCount = dao.countRow(category, searchKey, searchValue, locations); // 해당 카테고리 글 수
 		int currentPage = 1; // 현재 페이지
 		if (req.getParameter("pageNum") != null) {
 			currentPage = Integer.parseInt(req.getParameter("pageNum")); // 현재 페이지
 			req.setAttribute("currentPage", currentPage);
 		}
 		final int startPage = 1; // 시작 페이지
-		int pageCount = pageCount(boardCount ,board_loc); // 페이지 개수
+		int pageCount = pageCount(boardCount, board_loc); // 페이지 개수
 		int showRows = 9; // 보여줄 글 개수
 		if (board_loc != null) {
 			if (board_loc.equals("seoul") || board_loc.equals("gyeonggi") || board_loc.equals("index"))
@@ -291,14 +301,16 @@ public class BoardAction {
 		int startRow = (currentPage - 1) * showRows + 1; // 어디서 부터 보여줄 것인지
 		int endRow = currentPage * showRows; // 어디까지 보여줄 것인지
 
-		System.out.println(searchValue + " : " + searchKey);
-		aList = dao.listMethod(category, startRow, endRow, searchValue, searchKey);
+		aList = dao.listMethod(category, startRow, endRow, searchValue, searchKey, locations);
+		fList = dao.flistMethod(1, 3);
 		req.setAttribute("searchKey", searchKey); // 검색 키
 		req.setAttribute("searchValue", searchValue); // 검색 값
 		req.setAttribute("endPage", pageCount); // 마지막 페이지
 		req.setAttribute("startPage", startPage); // 첫 페이지
 		req.setAttribute("category", category); // 카테고리
+		req.setAttribute("location", location);
 		req.setAttribute("aList", aList); // 보여줄 글 목록
+		req.setAttribute("fList", fList); // 보여줄 글 목록
 	} // end listAction();
 
 	private int pageCount(int boardCount, String board_loc) {
